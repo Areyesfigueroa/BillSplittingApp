@@ -2,6 +2,8 @@
 
 //Default static value
 int GroupRecords::index = 0;
+GroupRecords* GroupRecords::_instance = 0;
+
 
 GroupRecords::GroupRecords()
 {}
