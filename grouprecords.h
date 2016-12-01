@@ -16,13 +16,14 @@ key: groups Name
 class GroupRecords
 {
     static int index;
-    std::vector<Group*> groupRecords;
+    std::set<Group*> groupRecords;
     static GroupRecords *_instance;
     GroupRecords();
     ~GroupRecords();
 public:
     void addGroup(Group*);
-    Group* fetchGroup(int);
+    Group* fetchGroupByIndex(int);
+    Group* fetchLatestGroup();
     const int getIndex()const;
     void setIndex(int index);
     static GroupRecords *instance()

@@ -34,10 +34,10 @@ void MainWindow::onGroupCreated()
     //get its name to be displayed in the listWidget
     //testing
 
-    //GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
-    QString groupName = QString::fromStdString(GroupRecords::instance()->fetchGroup(GroupRecords::instance()->getIndex())->getName());//convert Qstring to string
-    ui->listWidget->addItem(groupName); //testing
-    GroupRecords::instance()->setIndex(GroupRecords::instance()->getIndex()+1); //increment index
+    GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
+    //QString groupName = QString::fromStdString(_instance->fetchLatestGroup()->getName());//convert Qstring to string
+    //ui->listWidget->addItem(groupName); //testing
+    _instance->setIndex(_instance->getIndex()+1); //increment index
 }
 
 void MainWindow::on_editButton_clicked()
