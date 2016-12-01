@@ -1,12 +1,13 @@
 #include "grouprecords.h"
-#include <iterator>
+
 //Default static value
 int GroupRecords::index = 0;
 GroupRecords* GroupRecords::_instance = 0;
 
-
 GroupRecords::GroupRecords()
-{}
+{
+    this->iter = groupRecords.begin();
+}
 
 GroupRecords::~GroupRecords()
 {
@@ -20,11 +21,15 @@ void GroupRecords::addGroup(Group* groupPtr)
 
 Group* GroupRecords::fetchLatestGroup()
 {
-    typedef std::set<Group*>::iterator it;
+    return *this->iter;
+}
 
-    it iterator = groupRecords.end();
-
-    return *iterator;
+void GroupRecords::incrementSet()
+{
+   if(*this->iter++) //if it is not empty increment pointer
+   {
+      this->iter++;
+   }
 }
 
 Group* GroupRecords::fetchGroupByIndex(int index)

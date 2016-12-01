@@ -35,8 +35,9 @@ void MainWindow::onGroupCreated()
     //testing
 
     GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
-    //QString groupName = QString::fromStdString(_instance->fetchLatestGroup()->getName());//convert Qstring to string
-    //ui->listWidget->addItem(groupName); //testing
+
+    std::string testing = _instance->fetchLatestGroup()->getName();
+    ui->listWidget->addItem(QString::fromStdString(testing)); //testing
     _instance->setIndex(_instance->getIndex()+1); //increment index
 }
 

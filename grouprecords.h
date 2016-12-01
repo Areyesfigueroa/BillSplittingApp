@@ -4,6 +4,7 @@
 #include "group.h"
 #include <vector>
 #include <set>
+#include <iterator>
 /*
 This class is in charge of holding all of the groups in a map with an index
 this will be done so that I can access the different groups when I need to make
@@ -17,6 +18,7 @@ class GroupRecords
 {
     static int index;
     std::set<Group*> groupRecords;
+    std::set<Group*>::iterator iter;
     static GroupRecords *_instance;
     GroupRecords();
     ~GroupRecords();
@@ -26,6 +28,7 @@ public:
     Group* fetchLatestGroup();
     const int getIndex()const;
     void setIndex(int index);
+    void incrementSet();
     static GroupRecords *instance()
     {
         if(!_instance)
