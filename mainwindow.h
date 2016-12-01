@@ -19,6 +19,8 @@ private slots:
     void on_plusButton_clicked();
     void onGroupCreated();
 
+    void on_editButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     CreateGroupDialog *createGrpDialog;

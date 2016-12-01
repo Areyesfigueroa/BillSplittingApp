@@ -20,10 +20,10 @@ void MainWindow::on_plusButton_clicked()
 {
     if(!createGrpDialog)//Creates one instance at a time
     {
-    //To use the second window create an instance of the class
-    createGrpDialog = new CreateGroupDialog(this);
-    //This is where you connect it// FUCKING AWESOME
-    connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
+        //To use the second window create an instance of the class
+        createGrpDialog = new CreateGroupDialog(this);
+        //This is where you connect it// FUCKING AWESOME
+        connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
     }
     createGrpDialog->show();
 }
@@ -38,4 +38,9 @@ void MainWindow::onGroupCreated()
     QString groupName = QString::fromStdString(GroupRecords::instance()->fetchGroup(GroupRecords::instance()->getIndex())->getName());//convert Qstring to string
     ui->listWidget->addItem(groupName); //testing
     GroupRecords::instance()->setIndex(GroupRecords::instance()->getIndex()+1); //increment index
+}
+
+void MainWindow::on_editButton_clicked()
+{
+    //Edit the group name and size
 }

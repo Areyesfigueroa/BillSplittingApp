@@ -21,7 +21,16 @@ void CreateGroupDialog::on_createButton_clicked()
     //creates a new instance everytime
     Group *groupPtr = new Group(ui->lineEditGroupName->text().toStdString(),
                              ui->lineEditGroupSize->text().toInt());
+    //adding group pointer
+    GroupRecords::instance()->addGroup(groupPtr);
 
-    GroupRecords::instance()->addGroup(groupPtr); //adding group pointer
-    emit this->updateList();//sending the signal
+    //Clear the text boxes
+    this->ui->lineEditGroupName->clear();//works
+    this->ui->lineEditGroupSize->clear();//works
+
+    //Close the Dialog window
+    this->close();
+
+    //Sending Signal
+    emit this->updateList();
 }
