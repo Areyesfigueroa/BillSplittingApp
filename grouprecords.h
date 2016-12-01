@@ -3,6 +3,7 @@
 
 #include "group.h"
 #include <vector>
+#include <set>
 /*
 This class is in charge of holding all of the groups in a map with an index
 this will be done so that I can access the different groups when I need to make

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QWidget>
+#include "group.h"
 
 namespace Ui {
 class CreateGroupDialog;
@@ -24,7 +25,7 @@ signals:
 
 private:
     Ui::CreateGroupDialog *ui;
-
+    Group *groupPtr;
 };
 
 #endif // CREATEGROUPDIALOG_H

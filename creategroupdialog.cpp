@@ -1,6 +1,5 @@
 #include "creategroupdialog.h"
 #include "ui_creategroupdialog.h"
-#include "group.h"
 #include "grouprecords.h"
 
 CreateGroupDialog::CreateGroupDialog(QWidget *parent) :
@@ -12,15 +11,24 @@ CreateGroupDialog::CreateGroupDialog(QWidget *parent) :
 
 CreateGroupDialog::~CreateGroupDialog()
 {
-    delete ui;
+    delete ui; //will delete all pointers with it
 }
 
 void CreateGroupDialog::on_createButton_clicked()
 {
+    //Need to check that the group is not empty text
+
+    //Check if input is null
+    if(ui->lineEditGroupName->text().isEmpty())
+    {
+        return;
+    }
+
+    groupPtr = new Group(ui->lineEditGroupName->text().toStdString(),
+                             ui->lineEditGroupSize->text().toInt());
     //Adds the user input into my group
     //creates a new instance everytime
-    Group *groupPtr = new Group(ui->lineEditGroupName->text().toStdString(),
-                             ui->lineEditGroupSize->text().toInt());
+
     //adding group pointer
     GroupRecords::instance()->addGroup(groupPtr);
 
