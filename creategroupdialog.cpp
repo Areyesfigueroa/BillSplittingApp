@@ -1,6 +1,7 @@
 #include "creategroupdialog.h"
 #include "ui_creategroupdialog.h"
 #include "group.h"
+#include "grouprecords.h"
 
 CreateGroupDialog::CreateGroupDialog(QWidget *parent) :
     QDialog(parent),
@@ -17,8 +18,10 @@ CreateGroupDialog::~CreateGroupDialog()
 void CreateGroupDialog::on_createButton_clicked()
 {
     //Adds the user input into my group
+    //creates a new instance everytime
     Group *groupPtr = new Group(ui->lineEditGroupName->text().toStdString(),
-                             ui->lineEditGroupSize->text().toInt()); //creates a new instance everytime
-    //After adding the group Data in, place the groupPtr in the groupRecorder for editing
-    emit this->updateList();
+                             ui->lineEditGroupSize->text().toInt());
+
+    GroupRecords::instance()->addGroup(groupPtr); //adding group pointer
+    emit this->updateList();//sending the signal
 }

@@ -1,6 +1,8 @@
 #ifndef GROUPRECORDS_H
 #define GROUPRECORDS_H
 
+#include "group.h"
+#include <vector>
 /*
 This class is in charge of holding all of the groups in a map with an index
 this will be done so that I can access the different groups when I need to make
@@ -8,11 +10,28 @@ changes.
 
 key: groups Name
 */
+
+
 class GroupRecords
 {
-
-public:
+    static int index;
+    std::vector<Group*> groupRecords;
+    static GroupRecords *_instance;
     GroupRecords();
+    ~GroupRecords();
+public:
+    void addGroup(Group*);
+    Group* fetchGroup(int);
+    const int getIndex()const;
+    void setIndex(int index);
+    static GroupRecords *instance()
+    {
+        if(!_instance)
+        {
+            _instance = new GroupRecords();
+        }
+        return _instance;
+    }
 };
 
 #endif // GROUPRECORDS_H

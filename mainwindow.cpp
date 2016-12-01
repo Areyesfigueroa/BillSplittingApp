@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "grouprecords.h"
 
 //list lives here
 
@@ -29,7 +30,12 @@ void MainWindow::on_plusButton_clicked()
 
 void MainWindow::onGroupCreated()
 {
-    //add the groupRecords to the list
+    //fetch the group from the groupRecords and
+    //get its name to be displayed in the listWidget
     //testing
-    ui->listWidget->addItem("Group 1 created");
+
+    //GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
+    QString groupName = QString::fromStdString(GroupRecords::instance()->fetchGroup(GroupRecords::instance()->getIndex())->getName());//convert Qstring to string
+    ui->listWidget->addItem(groupName); //testing
+    GroupRecords::instance()->setIndex(GroupRecords::instance()->getIndex()+1); //increment index
 }
