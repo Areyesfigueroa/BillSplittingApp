@@ -6,7 +6,6 @@ GroupRecords* GroupRecords::_instance = 0;
 
 GroupRecords::GroupRecords()
 {
-    this->iter = groupRecords.begin();
 }
 
 GroupRecords::~GroupRecords()
@@ -21,15 +20,13 @@ void GroupRecords::addGroup(Group* groupPtr)
 
 Group* GroupRecords::fetchLatestGroup()
 {
-    return *this->iter;
-}
+    typedef std::set<Group*>::iterator it;
+    it iterator;
 
-void GroupRecords::incrementSet()
-{
-   if(*this->iter++) //if it is not empty increment pointer
-   {
-      this->iter++;
-   }
+    iterator = groupRecords.end();
+    iterator--;
+    return *iterator;
+
 }
 
 Group* GroupRecords::fetchGroupByIndex(int index)

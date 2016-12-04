@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QListWidget>
 #include "creategroupdialog.h"
 
 namespace Ui {
@@ -15,6 +16,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
 private slots:
     void on_plusButton_clicked();
     void onGroupCreated();
@@ -24,6 +26,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     CreateGroupDialog *createGrpDialog;
+
 };
 
 #endif // MAINWINDOW_H

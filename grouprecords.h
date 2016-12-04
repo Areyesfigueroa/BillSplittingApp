@@ -18,7 +18,6 @@ class GroupRecords
 {
     static int index;
     std::set<Group*> groupRecords;
-    std::set<Group*>::iterator iter;
     static GroupRecords *_instance;
     GroupRecords();
     ~GroupRecords();
@@ -28,7 +27,6 @@ public:
     Group* fetchLatestGroup();
     const int getIndex()const;
     void setIndex(int index);
-    void incrementSet();
     static GroupRecords *instance()
     {
         if(!_instance)
