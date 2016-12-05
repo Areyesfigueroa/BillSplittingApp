@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "grouprecords.h"
+#include <QTextStream>
 
 //list lives here
 //Check with teacher to choose the most optimal way of checking for duplicates
@@ -10,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    //init
+    createGrpDialog = 0;
+    editGroupDialog = 0;
     ui->setupUi(this);
 }
 
@@ -24,12 +28,20 @@ void MainWindow::on_plusButton_clicked()
     {
         //To use the second window create an instance of the class
         createGrpDialog = new CreateGroupDialog(this);
-        //This is where you connect it
-        connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
     }
+
+    connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
     createGrpDialog->show();
 }
-
+void MainWindow::on_editButton_clicked()
+{
+    if(!editGroupDialog)
+    {
+        editGroupDialog = new EditGroupDialog(this);
+    }
+    editGroupDialog->show();
+}
+//connected
 void MainWindow::onGroupCreated()
 {
     //fetch the group from the groupRecords and
@@ -38,17 +50,26 @@ void MainWindow::onGroupCreated()
     GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
 
     std::string testing = _instance->fetchLatestGroup()->getName();
-
-
+    //original
     ui->listWidget->addItem(QString::fromStdString(testing));
     //Check for a way to stop duplicates
 }
-
-void MainWindow::on_editButton_clicked()
+//connected
+void MainWindow::onEditGroup()
 {
     //Edit the group name and size
-    //get the current selecte item
-    QListWidgetItem *item = ui->listWidget->currentItem();
-    item->setTextColor(Qt::red);
+    //get the current selected item
+    //Assuming no duplicates will be added to the listWidget.
 
+    int index = ui->listWidget->currentRow();
+    QTextStream out(stdout);
+    out << index;
+    std::string bacon = "bacon";
+    Group* currGroup = GroupRecords::instance()->fetchGroupByIndex(index);
+
+    //overwrite the groupName
+    currGroup->setName(bacon);
+    ui->listWidget->currentItem()->setText(QString::fromStdString(currGroup->getName()));
 }
+
+

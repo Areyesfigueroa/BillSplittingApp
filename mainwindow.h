@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QListWidget>
 #include "creategroupdialog.h"
+#include "editgroupdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,12 +21,14 @@ public:
 private slots:
     void on_plusButton_clicked();
     void onGroupCreated();
+    void onEditGroup();
 
     void on_editButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     CreateGroupDialog *createGrpDialog;
+    EditGroupDialog *editGroupDialog;
 
 };
 
