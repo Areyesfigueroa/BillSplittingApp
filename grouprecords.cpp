@@ -39,18 +39,6 @@ Group* GroupRecords::fetchGroupByIndex(int index)
     iterator = groupRecords.begin();
     advance(iterator, index);
     return *iterator;
-
-    /*for(iterator = groupRecords.begin(); iterator != groupRecords.end(); iterator++)
-    {
-        if(counter != index)
-        {
-            counter++;
-        }
-        else
-        {
-            return *iterator; //dereferencing a pointer
-        }
-    }*/
     //Need to create a try catch block class to make sure if
     //counter does not match index and we go through the set to
     //return an exception, saying could not find the item you are looking for

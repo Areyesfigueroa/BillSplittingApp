@@ -39,6 +39,8 @@ void MainWindow::on_editButton_clicked()
     {
         editGroupDialog = new EditGroupDialog(this);
     }
+
+    connect(editGroupDialog, SIGNAL(groupChanged(std::string,int)),this,SLOT(onEditGroup(std::string,int)));
     editGroupDialog->show();
 }
 //connected
@@ -54,21 +56,29 @@ void MainWindow::onGroupCreated()
     ui->listWidget->addItem(QString::fromStdString(testing));
     //Check for a way to stop duplicates
 }
+
 //connected
-void MainWindow::onEditGroup()
+void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)
 {
     //Edit the group name and size
     //get the current selected item
     //Assuming no duplicates will be added to the listWidget.
 
+    //Steps:
+    //Index gives me the current selected row
+    //search the set by index
+    //
     int index = ui->listWidget->currentRow();
     QTextStream out(stdout);
     out << index;
     std::string bacon = "bacon";
     Group* currGroup = GroupRecords::instance()->fetchGroupByIndex(index);
 
+
+
     //overwrite the groupName
-    currGroup->setName(bacon);
+    currGroup->setName(newGrpName);
+    currGroup->setSize(newGrpSize);
     ui->listWidget->currentItem()->setText(QString::fromStdString(currGroup->getName()));
 }
 

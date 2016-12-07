@@ -1,5 +1,6 @@
 #include "editgroupdialog.h"
 #include "ui_editgroupdialog.h"
+#include <QString>
 
 EditGroupDialog::EditGroupDialog(QWidget *parent) :
     QDialog(parent),
@@ -13,7 +14,7 @@ EditGroupDialog::~EditGroupDialog()
     delete ui;
 }
 
-void EditGroupDialog::on_pushButton_clicked()
+void EditGroupDialog::on_okButton_clicked()
 {
     //Need to check that the group is not empty text
 
@@ -23,6 +24,11 @@ void EditGroupDialog::on_pushButton_clicked()
         return;
     }
 
+    //Fetch the group on groupRecords
+    //Save the input values
+    std::string grpName = ui->lineEditGrpName->text().toStdString();
+    int grpSize = ui->lineEditGrpSize->text().toInt();
+
     //Clear the text boxes
     this->ui->lineEditGrpName->clear();//works
     this->ui->lineEditGrpSize->clear();//works
@@ -31,5 +37,5 @@ void EditGroupDialog::on_pushButton_clicked()
     this->close();
 
     //Sending Signal
-    emit this->groupChanged();
+    emit this->groupChanged(grpName, grpSize);
 }

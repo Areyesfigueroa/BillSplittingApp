@@ -18,10 +18,10 @@ public:
     ~EditGroupDialog();
 
 signals:
-    void groupChanged();
+    void groupChanged(std::string newGrpName, int newGrpSize);
 
 private slots:
-    void on_pushButton_clicked();
+    void on_okButton_clicked();
 
 private:
     Ui::EditGroupDialog *ui;

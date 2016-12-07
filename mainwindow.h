@@ -21,7 +21,7 @@ public:
 private slots:
     void on_plusButton_clicked();
     void onGroupCreated();
-    void onEditGroup();
+    void onEditGroup(std::string, int);
 
     void on_editButton_clicked();
 
