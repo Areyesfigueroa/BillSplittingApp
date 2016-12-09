@@ -40,5 +40,5 @@ void CreateGroupDialog::on_createButton_clicked()
     this->close();
 
     //Sending Signal
-    emit this->updateList();
+    this->updateList();
 }

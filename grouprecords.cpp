@@ -16,32 +16,18 @@ GroupRecords::~GroupRecords()
 
 void GroupRecords::addGroup(Group* groupPtr)
 {
-    groupRecords.insert(groupPtr);
+    groupRecords.push_back(groupPtr);
 }
 
 Group* GroupRecords::fetchLatestGroup()
 {
-    typedef std::set<Group*>::iterator it;
-    it iterator;
-
-    iterator = groupRecords.end();
-    iterator--;
-    return *iterator;
+    return groupRecords.back();
 
 }
 
 Group* GroupRecords::fetchGroupByIndex(int index)
 {
-    typedef std::set<Group*>::iterator it;
-    it iterator;
-    //int counter = 0;
-   //Iterate until you reach the index
-    iterator = groupRecords.begin();
-    advance(iterator, index);
-    return *iterator;
-    //Need to create a try catch block class to make sure if
-    //counter does not match index and we go through the set to
-    //return an exception, saying could not find the item you are looking for
+    return groupRecords[index];
 }
 
 void GroupRecords::setIndex(int index)

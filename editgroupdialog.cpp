@@ -37,5 +37,5 @@ void EditGroupDialog::on_okButton_clicked()
     this->close();
 
     //Sending Signal
-    emit this->groupChanged(grpName, grpSize);
+    this->groupChanged(grpName, grpSize);
 }

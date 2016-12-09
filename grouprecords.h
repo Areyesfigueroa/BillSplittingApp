@@ -16,7 +16,8 @@ key: groups Name
 class GroupRecords
 {
     static int index;
-    std::set<Group*> groupRecords;
+    //use stl find and iterate backwards
+    std::vector<Group*> groupRecords;
     static GroupRecords *_instance;
     GroupRecords();
     ~GroupRecords();

@@ -6,6 +6,7 @@
 //list lives here
 //Check with teacher to choose the most optimal way of checking for duplicates
 //For now do not enter duplicate groups.
+//Check using a find
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -28,9 +29,9 @@ void MainWindow::on_plusButton_clicked()
     {
         //To use the second window create an instance of the class
         createGrpDialog = new CreateGroupDialog(this);
+        connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
     }
 
-    connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
     createGrpDialog->show();
 }
 void MainWindow::on_editButton_clicked()
@@ -39,8 +40,8 @@ void MainWindow::on_editButton_clicked()
     {
         editGroupDialog = new EditGroupDialog(this);
     }
-
     connect(editGroupDialog, SIGNAL(groupChanged(std::string,int)),this,SLOT(onEditGroup(std::string,int)));
+
     editGroupDialog->show();
 }
 //connected
@@ -55,28 +56,20 @@ void MainWindow::onGroupCreated()
     //original
     ui->listWidget->addItem(QString::fromStdString(testing));
     //Check for a way to stop duplicates
+    //Disconnect the signal
+    //disconnect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
+
 }
 
 //connected
 void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)
 {
-    //Edit the group name and size
-    //get the current selected item
-    //Assuming no duplicates will be added to the listWidget.
-
-    //Steps:
-    //Index gives me the current selected row
-    //search the set by index
-    //
     int index = ui->listWidget->currentRow();
     QTextStream out(stdout);
     out << index;
-    std::string bacon = "bacon";
     Group* currGroup = GroupRecords::instance()->fetchGroupByIndex(index);
 
-
-
-    //overwrite the groupName
+    //overwrite the Group
     currGroup->setName(newGrpName);
     currGroup->setSize(newGrpSize);
     ui->listWidget->currentItem()->setText(QString::fromStdString(currGroup->getName()));
