@@ -39,8 +39,8 @@ void MainWindow::on_editButton_clicked()
     if(!editGroupDialog)
     {
         editGroupDialog = new EditGroupDialog(this);
+        connect(editGroupDialog, SIGNAL(groupChanged(std::string,int)),this,SLOT(onEditGroup(std::string,int)));
     }
-    connect(editGroupDialog, SIGNAL(groupChanged(std::string,int)),this,SLOT(onEditGroup(std::string,int)));
 
     editGroupDialog->show();
 }
