@@ -8,6 +8,11 @@
 //For now do not enter duplicate groups.
 //Check using a find
 
+//Default Static Values
+int MainWindow::tableRow = 0;
+int MainWindow::itemRow = 0;
+int MainWindow::itemColumn = 0;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -16,7 +21,16 @@ MainWindow::MainWindow(QWidget *parent) :
     createGrpDialog = 0;
     editGroupDialog = 0;
     ui->setupUi(this);
+
+    //Init Table
     tableWidget = ui->tableWidget;
+
+    //Init Table Row and Column
+    tableWidget->setColumnCount(4);
+    tableWidget->setRowCount(0);
+
+    //Init Table Header
+    tableWidget->setHorizontalHeaderLabels(QStringList()<<"Group Name"<<"Group Size"<< "People" << "Total Bill");
 }
 
 MainWindow::~MainWindow()
@@ -28,7 +42,6 @@ void MainWindow::on_plusButton_clicked()
 {
     if(!createGrpDialog)//Creates one instance at a time
     {
-        //To use the second window create an instance of the class
         createGrpDialog = new CreateGroupDialog(this);
         connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
     }
@@ -57,25 +70,24 @@ void MainWindow::onGroupCreated()
     //Adding name to listWidget
     ui->listWidget->addItem(QString::fromStdString(grpName));
 
-    //Setting Table Rows and Columns
-    tableWidget->setRowCount(10);
-    tableWidget->setColumnCount(4);
+    //increment row
+    tableRow++;
 
-    //Changing Header
-    tableWidget->setHorizontalHeaderLabels(QStringList()<<"Group Name"<<"Group Size"<< "People" << "Bills");
-
-    //Row and Column for item placement
-    int row, column;
-    row = column = 0;
+    //Setting Table Rows
+    tableWidget->setRowCount(tableRow);
 
     //Items need to be newed, new Items
     QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(grpName));
     QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(grpSize));
 
     //Setting Item Placement
-    tableWidget->setItem(row, column, itemGrpName);
-    tableWidget->setItem(row, column+1, itemGrpSize);
+    tableWidget->setItem(itemRow, itemColumn, itemGrpName);
+    tableWidget->setItem(itemRow, itemColumn + 1, itemGrpSize); //increment column
 
+    //increment item rows
+    itemRow++;
+
+    //QTableWidgetClear, deletes pointer and the data in it
 }
 
 //connected

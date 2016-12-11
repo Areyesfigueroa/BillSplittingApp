@@ -32,6 +32,9 @@ private:
     CreateGroupDialog *createGrpDialog;
     EditGroupDialog *editGroupDialog;
 
+    static int tableRow;
+    static int itemRow, itemColumn;
+
 };
 
 #endif // MAINWINDOW_H
