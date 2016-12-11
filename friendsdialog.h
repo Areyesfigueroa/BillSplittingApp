@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QVBoxLayout>
+#include <QPushButton>
 
 
 namespace Ui {
@@ -18,14 +19,19 @@ public:
     ~FriendsDialog();
 
 private slots:
+    void on_confirmButton_clicked();
     void onAddFriends(int grpSize);
+
 
 private:
     Ui::FriendsDialog *ui;
-
+    //Data
+    QPushButton *confirmButton;
+    QVBoxLayout *multLayouts;
 
     //functions
     QVBoxLayout* createUIAttributes();
+    void clearLayout(QLayout*, bool);
 };
 
 #endif // FRIENDSDIALOG_H
