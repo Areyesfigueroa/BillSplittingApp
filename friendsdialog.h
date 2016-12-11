@@ -32,6 +32,7 @@ private:
     //functions
     QVBoxLayout* createUIAttributes();
     void clearLayout(QLayout*, bool);
+    void personInfo(std::string&, std::string&, std::string&);
 };
 
 #endif // FRIENDSDIALOG_H

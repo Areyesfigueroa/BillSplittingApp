@@ -79,8 +79,9 @@ void MainWindow::onGroupCreated()
     GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
 
     //getting latest groupName
-    std::string grpName = _instance->fetchLatestGroup()->getName();
-    int grpSize = _instance->fetchLatestGroup()->getSize();
+    Group* grp = _instance->getRecords().fetchLatestRecord();
+    std::string grpName = grp->getName();
+    int grpSize = grp->getSize();
 
     updateTable(grpName, grpSize);
     createFriendsDialogConnection();
@@ -121,7 +122,7 @@ void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)
     int index = ui->listWidget->currentRow();
     QTextStream out(stdout);
     out << index;
-    Group* currGroup = GroupRecords::instance()->fetchGroupByIndex(index);
+    Group* currGroup = GroupRecords::instance()->getRecords().fetchRecordsByIndex(index);
 
     //overwrite the Group
     currGroup->setName(newGrpName);

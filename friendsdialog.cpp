@@ -1,5 +1,6 @@
 #include "friendsdialog.h"
 #include "ui_friendsdialog.h"
+#include "person.h"
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -28,6 +29,7 @@ FriendsDialog::~FriendsDialog()
 void FriendsDialog::on_confirmButton_clicked()
 {
     QLayout* childLayout = multLayouts->layout();
+
     clearLayout(childLayout, true);
     delete childLayout;
     this->close();
@@ -46,6 +48,9 @@ void FriendsDialog::onAddFriends(int grpSize)
     while(index < grpSize)
     {
         multLayouts->addLayout(createUIAttributes());
+
+
+
         index++;
     }
     std::string name = confirmButton->text().toStdString();
@@ -63,7 +68,7 @@ void FriendsDialog::clearLayout(QLayout* layout, bool deleteWidgets = true)
         QWidget *widget;
         if((deleteWidgets) &&(widget = item->widget()))
         {
-//stop deleting the button
+            //stop deleting the button
             if(widget == confirmButton)
             {
                 out << "Equal"<<endl;
@@ -118,5 +123,17 @@ QVBoxLayout* FriendsDialog::createUIAttributes()
     verticalLayout->addLayout(horLayoutPhoneNum);
     verticalLayout->addLayout(horLayoutEmail);
 
+    //Passing info
+    personInfo(labelName->text().toStdString(),
+               labelPhoneNum->text().toStdString(),
+               labelEmail->text().toStdString());
+
     return verticalLayout;
+}
+
+void FriendsDialog::personInfo( std::string& name,  std::string& phoneNum, std::string& email)
+{
+    Person *person = new Person(name, phoneNum, email);
+    //add to people records
+
 }

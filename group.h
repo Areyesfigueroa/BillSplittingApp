@@ -8,8 +8,6 @@ it will be stored on the heap with multiple instances
 Will store and edit:
 groupNames
 groupSizes
-
-
 */
 
 class Group

@@ -2,6 +2,7 @@
 #define GROUPRECORDS_H
 
 #include "group.h"
+#include "records.h"
 #include <vector>
 #include <set>
 /*
@@ -15,19 +16,11 @@ key: groups Name
 
 class GroupRecords
 {
-    static int index;
-    //use stl find and iterate backwards when comparing
-    std::vector<Group*> groupRecords;
     static GroupRecords *_instance;
+    Records<Group*> groupRecords;
     GroupRecords();
     ~GroupRecords();
 public:
-    void addGroup(Group*);
-    Group* fetchGroupByIndex(int);
-    Group* fetchLatestGroup();
-    const int getIndex()const;
-    void setIndex(int index);
-    bool checkForDuplicates(const std::string&);
 
     static GroupRecords *instance()
     {
@@ -37,6 +30,8 @@ public:
         }
         return _instance;
     }
+
+    Records<Group*> getRecords() const;
 
 };
 

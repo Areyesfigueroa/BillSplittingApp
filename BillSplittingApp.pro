@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     grouprecords.cpp \
     editgroupdialog.cpp \
     friendsdialog.cpp \
-    person.cpp
+    person.cpp \
+    records.cpp
 
 HEADERS  += mainwindow.h \
     creategroupdialog.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     grouprecords.h \
     editgroupdialog.h \
     friendsdialog.h \
-    person.h
+    person.h \
+    records.h
 
 FORMS    += mainwindow.ui \
     creategroupdialog.ui \
