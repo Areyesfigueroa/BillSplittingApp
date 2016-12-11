@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QListWidget>
+#include <QTableWidget>
 #include "creategroupdialog.h"
 #include "editgroupdialog.h"
 
@@ -27,6 +28,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QTableWidget *tableWidget;
     CreateGroupDialog *createGrpDialog;
     EditGroupDialog *editGroupDialog;
 

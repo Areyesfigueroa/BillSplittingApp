@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     createGrpDialog = 0;
     editGroupDialog = 0;
     ui->setupUi(this);
+    tableWidget = ui->tableWidget;
 }
 
 MainWindow::~MainWindow()
@@ -31,7 +32,6 @@ void MainWindow::on_plusButton_clicked()
         createGrpDialog = new CreateGroupDialog(this);
         connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
     }
-
     createGrpDialog->show();
 }
 void MainWindow::on_editButton_clicked()
@@ -47,15 +47,34 @@ void MainWindow::on_editButton_clicked()
 //connected
 void MainWindow::onGroupCreated()
 {
-    //fetch the group from the groupRecords and
-    //get its name to be displayed in the listWidget
-    //testing
+    //getting instance
     GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
 
+    //getting latest groupName
     std::string grpName = _instance->fetchLatestGroup()->getName();
-    //original
+    int grpSize = _instance->fetchLatestGroup()->getSize();
+
+    //Adding name to listWidget
     ui->listWidget->addItem(QString::fromStdString(grpName));
-    //Check for a way to stop duplicates
+
+    //Setting Table Rows and Columns
+    tableWidget->setRowCount(10);
+    tableWidget->setColumnCount(4);
+
+    //Changing Header
+    tableWidget->setHorizontalHeaderLabels(QStringList()<<"Group Name"<<"Group Size"<< "People" << "Bills");
+
+    //Row and Column for item placement
+    int row, column;
+    row = column = 0;
+
+    //Items need to be newed, new Items
+    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(grpName));
+    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(grpSize));
+
+    //Setting Item Placement
+    tableWidget->setItem(row, column, itemGrpName);
+    tableWidget->setItem(row, column+1, itemGrpSize);
 
 }
 
