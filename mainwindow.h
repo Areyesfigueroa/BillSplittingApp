@@ -6,6 +6,7 @@
 #include <QTableWidget>
 #include "creategroupdialog.h"
 #include "editgroupdialog.h"
+#include "friendsdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,13 +28,20 @@ private slots:
     void on_editButton_clicked();
 
 private:
+    //Windows
     Ui::MainWindow *ui;
     QTableWidget *tableWidget;
     CreateGroupDialog *createGrpDialog;
     EditGroupDialog *editGroupDialog;
+    FriendsDialog *friendsDialog;
 
+    //Data
     static int tableRow;
     static int itemRow, itemColumn;
+
+    //Functions
+    void updateTable(const std::string&, int&);
+    void createFriendsDialogConnection();
 
 };
 

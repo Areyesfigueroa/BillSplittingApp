@@ -12,3 +12,8 @@ FriendsDialog::~FriendsDialog()
 {
     delete ui;
 }
+
+void FriendsDialog::onAddFriends()
+{
+
+}

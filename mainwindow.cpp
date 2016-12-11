@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //init
     createGrpDialog = 0;
     editGroupDialog = 0;
+    friendsDialog = 0;
+
+    //set up
     ui->setupUi(this);
 
     //Init Table
@@ -57,6 +60,18 @@ void MainWindow::on_editButton_clicked()
 
     editGroupDialog->show();
 }
+
+void MainWindow::createFriendsDialogConnection()
+{
+    if(!friendsDialog)
+    {
+        friendsDialog = new FriendsDialog(this);
+        connect(createGrpDialog, SIGNAL(addFriends()),friendsDialog,SLOT(onAddFriends()));
+    }
+
+    friendsDialog->show();
+}
+
 //connected
 void MainWindow::onGroupCreated()
 {
@@ -67,8 +82,16 @@ void MainWindow::onGroupCreated()
     std::string grpName = _instance->fetchLatestGroup()->getName();
     int grpSize = _instance->fetchLatestGroup()->getSize();
 
+    updateTable(grpName, grpSize);
+    createFriendsDialogConnection();
+
+
+}
+
+void MainWindow::updateTable(const std::string& name, int& size)
+{
     //Adding name to listWidget
-    ui->listWidget->addItem(QString::fromStdString(grpName));
+    ui->listWidget->addItem(QString::fromStdString(name));
 
     //increment row
     tableRow++;
@@ -77,8 +100,8 @@ void MainWindow::onGroupCreated()
     tableWidget->setRowCount(tableRow);
 
     //Items need to be newed, new Items
-    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(grpName));
-    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(grpSize));
+    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(name));
+    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(size));
 
     //Setting Item Placement
     tableWidget->setItem(itemRow, itemColumn, itemGrpName);
@@ -89,6 +112,8 @@ void MainWindow::onGroupCreated()
 
     //QTableWidgetClear, deletes pointer and the data in it
 }
+
+
 
 //connected
 void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)

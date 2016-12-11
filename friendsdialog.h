@@ -15,6 +15,9 @@ public:
     explicit FriendsDialog(QWidget *parent = 0);
     ~FriendsDialog();
 
+private slots:
+    void onAddFriends();
+
 private:
     Ui::FriendsDialog *ui;
 };

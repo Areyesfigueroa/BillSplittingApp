@@ -57,5 +57,7 @@ void CreateGroupDialog::on_createButton_clicked()
 
         //Sending Signal
         this->updateList();
+        this->addFriends(grpSize);
+
     }
 }
