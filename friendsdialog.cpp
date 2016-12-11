@@ -124,9 +124,9 @@ QVBoxLayout* FriendsDialog::createUIAttributes()
     verticalLayout->addLayout(horLayoutEmail);
 
     //Passing info
-    personInfo(labelName->text().toStdString(),
-               labelPhoneNum->text().toStdString(),
-               labelEmail->text().toStdString());
+   // personInfo(labelName->text().toStdString(),
+     //          labelPhoneNum->text().toStdString(),
+       //        labelEmail->text().toStdString());
 
     return verticalLayout;
 }
