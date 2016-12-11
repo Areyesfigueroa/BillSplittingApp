@@ -2,6 +2,8 @@
 #define FRIENDSDIALOG_H
 
 #include <QDialog>
+#include <QVBoxLayout>
+
 
 namespace Ui {
 class FriendsDialog;
@@ -16,10 +18,14 @@ public:
     ~FriendsDialog();
 
 private slots:
-    void onAddFriends();
+    void onAddFriends(int grpSize);
 
 private:
     Ui::FriendsDialog *ui;
+
+
+    //functions
+    QVBoxLayout* createUIAttributes();
 };
 
 #endif // FRIENDSDIALOG_H

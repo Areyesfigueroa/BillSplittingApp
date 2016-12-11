@@ -66,7 +66,7 @@ void MainWindow::createFriendsDialogConnection()
     if(!friendsDialog)
     {
         friendsDialog = new FriendsDialog(this);
-        connect(createGrpDialog, SIGNAL(addFriends()),friendsDialog,SLOT(onAddFriends()));
+        connect(createGrpDialog, SIGNAL(addFriends(int)),friendsDialog,SLOT(onAddFriends(int)));
     }
 
     friendsDialog->show();
