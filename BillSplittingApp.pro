@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     group.cpp \
     grouprecords.cpp \
     editgroupdialog.cpp \
-    friendsdialog.cpp
+    friendsdialog.cpp \
+    person.cpp
 
 HEADERS  += mainwindow.h \
     creategroupdialog.h \
     group.h \
     grouprecords.h \
     editgroupdialog.h \
-    friendsdialog.h
+    friendsdialog.h \
+    person.h
 
 FORMS    += mainwindow.ui \
     creategroupdialog.ui \
