@@ -7,6 +7,8 @@ CreateGroupDialog::CreateGroupDialog(QWidget *parent) :
     ui(new Ui::CreateGroupDialog)
 {
     ui->setupUi(this);
+    ui->labelWarning->hide();
+
 }
 
 CreateGroupDialog::~CreateGroupDialog()
@@ -31,7 +33,8 @@ void CreateGroupDialog::on_createButton_clicked()
     //Check Duplicates
     if(GroupRecords::instance()->checkForDuplicates(grpName))
     {
-        //there is a duplicate
+        //Display label
+        ui->labelWarning->show();
         return;
     }
     else
@@ -48,6 +51,9 @@ void CreateGroupDialog::on_createButton_clicked()
 
         //Close the Dialog window
         this->close();
+
+        //hide warning label
+        ui->labelWarning->hide();
 
         //Sending Signal
         this->updateList();
