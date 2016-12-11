@@ -52,12 +52,10 @@ void MainWindow::onGroupCreated()
     //testing
     GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
 
-    std::string testing = _instance->fetchLatestGroup()->getName();
+    std::string grpName = _instance->fetchLatestGroup()->getName();
     //original
-    ui->listWidget->addItem(QString::fromStdString(testing));
+    ui->listWidget->addItem(QString::fromStdString(grpName));
     //Check for a way to stop duplicates
-    //Disconnect the signal
-    //disconnect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
 
 }
 

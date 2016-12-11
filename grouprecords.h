@@ -27,6 +27,8 @@ public:
     Group* fetchLatestGroup();
     const int getIndex()const;
     void setIndex(int index);
+    bool checkForDuplicates(const std::string&);
+
     static GroupRecords *instance()
     {
         if(!_instance)
@@ -35,6 +37,7 @@ public:
         }
         return _instance;
     }
+
 };
 
 #endif // GROUPRECORDS_H

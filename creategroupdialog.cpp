@@ -24,21 +24,32 @@ void CreateGroupDialog::on_createButton_clicked()
         return;
     }
 
-    groupPtr = new Group(ui->lineEditGroupName->text().toStdString(),
-                             ui->lineEditGroupSize->text().toInt());
-    //Adds the user input into my group
-    //creates a new instance everytime
+    //get userInput
+    std::string grpName = ui->lineEditGroupName->text().toStdString();
+    int grpSize = ui->lineEditGroupSize->text().toInt();
 
-    //adding group pointer
-    GroupRecords::instance()->addGroup(groupPtr);
+    //Check Duplicates
+    if(GroupRecords::instance()->checkForDuplicates(grpName))
+    {
+        //there is a duplicate
+        return;
+    }
+    else
+    {
+        //Allocates the new groups
+        groupPtr = new Group(grpName, grpSize);
 
-    //Clear the text boxes
-    this->ui->lineEditGroupName->clear();//works
-    this->ui->lineEditGroupSize->clear();//works
+        //adding group ref
+        GroupRecords::instance()->addGroup(groupPtr);
 
-    //Close the Dialog window
-    this->close();
+        //Clear the text boxes
+        this->ui->lineEditGroupName->clear();//works
+        this->ui->lineEditGroupSize->clear();//works
 
-    //Sending Signal
-    this->updateList();
+        //Close the Dialog window
+        this->close();
+
+        //Sending Signal
+        this->updateList();
+    }
 }
