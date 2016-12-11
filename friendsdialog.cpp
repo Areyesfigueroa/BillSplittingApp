@@ -64,7 +64,15 @@ void FriendsDialog::clearLayout(QLayout* layout, bool deleteWidgets = true)
         if((deleteWidgets) &&(widget = item->widget()))
         {
 //stop deleting the button
-            delete widget;
+            if(widget == confirmButton)
+            {
+                out << "Equal"<<endl;
+                return;
+            }
+            else
+            {
+                delete widget;
+            }
         }
         if(QLayout* childLayout = item->layout())
         {
