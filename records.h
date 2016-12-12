@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "group.h"
 
 template <class T>
 class Records
@@ -12,15 +13,15 @@ std::vector<T> elements;
 public:
    // Records();
    // ~Records();
-    void addToRecords(const T record);
+    void addToRecords(T const&);
     T fetchRecordsByIndex(int index);
-    T fetchLatestRecord();
+    T fetchLatestRecord() const;
     bool checkForDuplicates(const std::string&);
 };
 
 
 template<class T>
-void Records<T>::addToRecords(const T record)
+void Records<T>::addToRecords(T const& record)
 {
     elements.push_back(record);
 }
@@ -32,8 +33,12 @@ T Records<T>::fetchRecordsByIndex(int index)
 }
 
 template<class T>
-T Records<T>::fetchLatestRecord()
+T Records<T>::fetchLatestRecord() const
 {
+    if(elements.empty())
+    {
+        return elements.back();
+    }
     return elements.back();
 }
 

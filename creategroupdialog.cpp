@@ -31,7 +31,7 @@ void CreateGroupDialog::on_createButton_clicked()
     int grpSize = ui->lineEditGroupSize->text().toInt();
 
     //Check Duplicates
-    if(GroupRecords::instance()->getRecords().checkForDuplicates(grpName))
+    if(GroupRecords::instance()->groupRecords.checkForDuplicates(grpName))
     {
         //Display label
         ui->labelWarning->show();
@@ -43,7 +43,7 @@ void CreateGroupDialog::on_createButton_clicked()
         groupPtr = new Group(grpName, grpSize);
 
         //adding group ref
-        GroupRecords::instance()->getRecords().addToRecords(groupPtr);
+        GroupRecords::instance()->groupRecords.addToRecords(groupPtr);
 
         //Clear the text boxes
         this->ui->lineEditGroupName->clear();//works
