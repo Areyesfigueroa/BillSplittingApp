@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QLineEdit>
 
 
 namespace Ui {
@@ -14,9 +15,11 @@ class FriendsDialog : public QDialog
 {
     Q_OBJECT
 
+    static int sIndex;
 public:
     explicit FriendsDialog(QWidget *parent = 0);
     ~FriendsDialog();
+
 
 private slots:
     void on_confirmButton_clicked();
@@ -29,8 +32,12 @@ private:
     QPushButton *confirmButton;
     QVBoxLayout *multLayouts;
 
+    QLineEdit **nameTracker;
+    QLineEdit **emailTracker;
+    QLineEdit **phoneTracker;
     //functions
     QVBoxLayout* createUIAttributes();
+    void deleteTrackers();
     void clearLayout(QLayout*, bool);
     void personInfo(std::string&, std::string&, std::string&);
 };

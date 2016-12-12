@@ -9,11 +9,18 @@
 #include <string>
 #include <QString>
 
+//default
+int FriendsDialog::sIndex = 0;
+
 FriendsDialog::FriendsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FriendsDialog)
 {
     multLayouts = 0;
+
+    nameTracker = new QLineEdit*[sIndex]; //dynamic array//Delete after
+    emailTracker = new QLineEdit*[sIndex];
+    phoneTracker = new QLineEdit*[sIndex];
 
     ui->setupUi(this);
 
@@ -30,9 +37,27 @@ void FriendsDialog::on_confirmButton_clicked()
 {
     QLayout* childLayout = multLayouts->layout();
 
+     int maxIndex = sIndex;
+     sIndex = 0;
+    //Passing info
+    while(sIndex < maxIndex)
+    {
+    personInfo(nameTracker[sIndex]->text().toStdString(),
+               phoneTracker[sIndex]->text().toStdString(),
+               emailTracker[sIndex]->text().toStdString());
+    sIndex++;
+    }
+    sIndex = 0;
+    //Clear the trackers
+
     clearLayout(childLayout, true);
     delete childLayout;
     this->close();
+}
+
+void FriendsDialog::deleteTrackers()
+{
+
 }
 
 void FriendsDialog::onAddFriends(int grpSize)
@@ -44,14 +69,10 @@ void FriendsDialog::onAddFriends(int grpSize)
     std::string multName = multLayouts->layout()->objectName().toStdString();
     out << multName.c_str()<<endl;
 
-    int index = 0;
-    while(index < grpSize)
+    while(sIndex < grpSize)
     {
         multLayouts->addLayout(createUIAttributes());
-
-
-
-        index++;
+        sIndex++;
     }
     std::string name = confirmButton->text().toStdString();
     out << name.c_str() <<endl;
@@ -123,10 +144,10 @@ QVBoxLayout* FriendsDialog::createUIAttributes()
     verticalLayout->addLayout(horLayoutPhoneNum);
     verticalLayout->addLayout(horLayoutEmail);
 
-    //Passing info
-   // personInfo(labelName->text().toStdString(),
-     //          labelPhoneNum->text().toStdString(),
-       //        labelEmail->text().toStdString());
+    //trackers
+    nameTracker[sIndex] = lineEditName;
+    phoneTracker[sIndex] = lineEditPhoneNum;
+    emailTracker[sIndex] = lineEditEmail;
 
     return verticalLayout;
 }

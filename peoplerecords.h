@@ -13,9 +13,9 @@ public:
 
     static PeopleRecords *instance()
     {
-        if(!_instance)
+        if(!p_instance)
         {
-            _instance = new PeopleRecords();
+            p_instance = new PeopleRecords();
         }
         return p_instance;
     }
