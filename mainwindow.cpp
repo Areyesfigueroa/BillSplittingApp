@@ -79,7 +79,7 @@ void MainWindow::onGroupCreated()
     GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
 
     //getting latest groupName
-    Group* grp = _instance->getRecords().fetchLatestRecord();
+    Group* grp = _instance->groupRecords.fetchLatestRecord();
     std::string grpName = grp->getName();
     int grpSize = grp->getSize();
 
@@ -122,7 +122,7 @@ void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)
     int index = ui->listWidget->currentRow();
     QTextStream out(stdout);
     out << index;
-    Group* currGroup = GroupRecords::instance()->getRecords().fetchRecordsByIndex(index);
+    Group* currGroup = GroupRecords::instance()->groupRecords.fetchRecordsByIndex(index);
 
     //overwrite the Group
     currGroup->setName(newGrpName);
