@@ -6,24 +6,20 @@
 
 class GroupRecords
 {
-    static GroupRecords *_instance;
+    static GroupRecords *r_instance;
     GroupRecords();
     ~GroupRecords();
 public:
 
     static GroupRecords *instance()
     {
-        if(!_instance)
+        if(!r_instance)
         {
-            _instance = new GroupRecords();
+            r_instance = new GroupRecords();
         }
-        return _instance;
+        return r_instance;
     }
 
     Records<Group*> groupRecords;
-
 };
-
-
-
 #endif // GROUPRECORDS_H
