@@ -1,6 +1,7 @@
 #include "friendsdialog.h"
 #include "ui_friendsdialog.h"
 #include "person.h"
+#include "peoplerecords.h"
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -14,7 +15,6 @@ FriendsDialog::FriendsDialog(QWidget *parent) :
     ui(new Ui::FriendsDialog)
 {
     multLayouts = 0;
-
     ui->setupUi(this);
 
     confirmButton = new QPushButton("Confirm", this);
@@ -30,6 +30,12 @@ void FriendsDialog::on_confirmButton_clicked()
 {
     QLayout* childLayout = multLayouts->layout();
 
+    //Passing info
+   personInfo(tracker[0]->text().toStdString(),
+               tracker[0]->text().toStdString(),
+               tracker[0]->text().toStdString());
+
+    sendingPersonInfo(childLayout, true);
     clearLayout(childLayout, true);
     delete childLayout;
     this->close();
@@ -41,8 +47,6 @@ void FriendsDialog::onAddFriends(int grpSize)
 
     //Multiple Layouts
     multLayouts = new QVBoxLayout();
-    std::string multName = multLayouts->layout()->objectName().toStdString();
-    out << multName.c_str()<<endl;
 
     int index = 0;
     while(index < grpSize)
@@ -53,16 +57,14 @@ void FriendsDialog::onAddFriends(int grpSize)
 
         index++;
     }
-    std::string name = confirmButton->text().toStdString();
-    out << name.c_str() <<endl;
+    Records<Person*> *rec = &personContainer;
+
     multLayouts->addWidget(confirmButton); //it is getting destroyed
     this->setLayout(multLayouts);
 }
 
 void FriendsDialog::clearLayout(QLayout* layout, bool deleteWidgets = true)
 {
-    QTextStream out(stdout);
-
     while(QLayoutItem *item = layout->takeAt(0))
     {
         QWidget *widget;
@@ -71,7 +73,6 @@ void FriendsDialog::clearLayout(QLayout* layout, bool deleteWidgets = true)
             //stop deleting the button
             if(widget == confirmButton)
             {
-                out << "Equal"<<endl;
                 return;
             }
             else
@@ -85,6 +86,13 @@ void FriendsDialog::clearLayout(QLayout* layout, bool deleteWidgets = true)
         }
         delete item;
     }
+}
+
+void FriendsDialog::sendingPersonInfo(QLayout* layout, bool deleteWidgets = true)
+{
+    QObjectList objList = layout->children();
+    QVBoxLayout* vertLayout;
+    QObject* obj = objList.back();
 }
 
 QVBoxLayout* FriendsDialog::createUIAttributes()
@@ -101,6 +109,8 @@ QVBoxLayout* FriendsDialog::createUIAttributes()
     QLabel *labelPhoneNum = new QLabel("Phone#: ");
     QLabel *labelEmail = new QLabel("Email: ");
 
+    //tracker
+   // tracker[0] = labelTitl;
     //Create lineEdit
     QLineEdit *lineEditName = new QLineEdit();
     QLineEdit *lineEditPhoneNum = new QLineEdit();
@@ -123,17 +133,17 @@ QVBoxLayout* FriendsDialog::createUIAttributes()
     verticalLayout->addLayout(horLayoutPhoneNum);
     verticalLayout->addLayout(horLayoutEmail);
 
-    //Passing info
-   // personInfo(labelName->text().toStdString(),
-     //          labelPhoneNum->text().toStdString(),
-       //        labelEmail->text().toStdString());
 
+    //Store LineEdits
+    tracker[0] = lineEditName;
     return verticalLayout;
 }
 
 void FriendsDialog::personInfo( std::string& name,  std::string& phoneNum, std::string& email)
 {
+    //Loops many times
     Person *person = new Person(name, phoneNum, email);
-    //add to people records
 
+    //add to person records
+    personContainer.addToRecords(person);
 }
