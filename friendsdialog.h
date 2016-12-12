@@ -4,10 +4,7 @@
 #include <QDialog>
 #include <QVBoxLayout>
 #include <QPushButton>
-#include <QLabel>
-#include <QLineEdit>
-#include "person.h"
-#include "records.h"
+
 
 namespace Ui {
 class FriendsDialog;
@@ -21,26 +18,21 @@ public:
     explicit FriendsDialog(QWidget *parent = 0);
     ~FriendsDialog();
 
-    //vector of persons
-    Records<Person*> personContainer;
-
 private slots:
     void on_confirmButton_clicked();
     void onAddFriends(int grpSize);
 
+
 private:
     Ui::FriendsDialog *ui;
-
     //Data
     QPushButton *confirmButton;
     QVBoxLayout *multLayouts;
-    QLineEdit *tracker[];
 
     //functions
     QVBoxLayout* createUIAttributes();
     void clearLayout(QLayout*, bool);
     void personInfo(std::string&, std::string&, std::string&);
-    void sendingPersonInfo(QLayout*, bool);
 };
 
 #endif // FRIENDSDIALOG_H

@@ -1,6 +1,5 @@
 #include "group.h"
 
-int Group::grpIndex = 0;
 Group::Group(std::string& name, int size):groupName(name), groupSize(size)
 {
 }
