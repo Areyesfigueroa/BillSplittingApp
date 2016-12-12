@@ -155,6 +155,4 @@ QVBoxLayout* FriendsDialog::createUIAttributes()
 void FriendsDialog::personInfo( std::string& name,  std::string& phoneNum, std::string& email)
 {
     Person *person = new Person(name, phoneNum, email);
-    //add to people records
-
 }

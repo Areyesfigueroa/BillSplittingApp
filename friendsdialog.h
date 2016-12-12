@@ -35,6 +35,7 @@ private:
     QLineEdit **nameTracker;
     QLineEdit **emailTracker;
     QLineEdit **phoneTracker;
+
     //functions
     QVBoxLayout* createUIAttributes();
     void deleteTrackers();
