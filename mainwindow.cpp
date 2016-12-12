@@ -79,12 +79,14 @@ void MainWindow::onGroupCreated()
     GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
 
     //getting latest groupName
-    Group* grp = GroupRecords::instance()->groupRecords.fetchLatestRecord();
+    Group* grp = _instance->getRecords().fetchLatestRecord();
     std::string grpName = grp->getName();
     int grpSize = grp->getSize();
 
     updateTable(grpName, grpSize);
     createFriendsDialogConnection();
+
+
 }
 
 void MainWindow::updateTable(const std::string& name, int& size)
@@ -112,13 +114,15 @@ void MainWindow::updateTable(const std::string& name, int& size)
     //QTableWidgetClear, deletes pointer and the data in it
 }
 
+
+
 //connected
 void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)
 {
     int index = ui->listWidget->currentRow();
     QTextStream out(stdout);
     out << index;
-    Group* currGroup = GroupRecords::instance()->groupRecords.fetchRecordsByIndex(index);
+    Group* currGroup = GroupRecords::instance()->getRecords().fetchRecordsByIndex(index);
 
     //overwrite the Group
     currGroup->setName(newGrpName);

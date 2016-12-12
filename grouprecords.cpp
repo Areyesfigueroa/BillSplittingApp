@@ -14,3 +14,7 @@ GroupRecords::~GroupRecords()
     delete this->_instance; //delete when object is destroyed
 }
 
+Records<Group*> GroupRecords::getRecords() const
+{
+    return groupRecords;
+}
