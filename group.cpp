@@ -25,3 +25,8 @@ void Group::addPerson(Person* person)
 {
     peopleRecords.addToRecords(person);
 }
+
+Person* Group::getLastestPerson()
+{
+    return peopleRecords.fetchLatestRecord();
+}

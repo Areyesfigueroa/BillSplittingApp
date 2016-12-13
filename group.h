@@ -23,6 +23,8 @@ public:
     void setGroupName(std::string&);
     void setGroupSize(int);
     void addPerson(Person*);
+    Person* getLastestPerson();
+
 
     const std::string& getGroupName() const;
     const int getGroupSize() const;

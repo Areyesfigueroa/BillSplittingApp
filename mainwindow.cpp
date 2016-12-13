@@ -91,15 +91,16 @@ void MainWindow::onUpdateTableInfo()
 {
     GroupRecords *_instance = GroupRecords::instance();
 
-    //std::string gprName = "";
-    //int grpSize = 0;
-    //gprName = _instance->groupRecords.fetchLatestRecord()->getGroupName();
-    //grpSize = _instance->groupRecords.fetchLatestRecord()->getGroupSize();
+    std::string groupName = _instance->groupRecords.fetchLatestRecord()->getGroupName();
+    int size = _instance->groupRecords.fetchLatestRecord()->getGroupSize();
+    Group* group = _instance->groupRecords.fetchLatestRecord();
 
-    //std::string grpName = "Name";
-    //int grpSize = 0;
+    Person* person = group->getLastestPerson();
+    std::string personName = person->getPersonName();
+
+
     //Adding name to listWidget
-    ui->listWidget->addItem(QString::fromStdString(_instance->groupRecords.fetchLatestRecord()->getGroupName()));
+    ui->listWidget->addItem(QString::fromStdString(groupName));
 
     //increment row
     tableRow++;
@@ -111,14 +112,14 @@ void MainWindow::onUpdateTableInfo()
 
 
     //Items need to be newed, new Items
-    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(_instance->groupRecords.fetchLatestRecord()->getGroupName()));
-    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(_instance->groupRecords.fetchLatestRecord()->getGroupSize()));
-    //QTableWidgetItem *itemGrpPeopleNames = new QTableWidgetItem()
+    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(groupName));
+    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(size));
+    QTableWidgetItem *itemGrpPeopleNames = new QTableWidgetItem(QString::fromStdString(personName));
 
     //Setting Item Placement
     tableWidget->setItem(itemRow, itemColumn, itemGrpName);
     tableWidget->setItem(itemRow, itemColumn + 1, itemGrpSize); //increment column
-    //tableWidget->setItem(itemRow, itemColumn + 2, );
+    tableWidget->setItem(itemRow, itemColumn + 2, itemGrpPeopleNames);
     //increment item rows
     itemRow++;
     //QTableWidgetClear, deletes pointer and the data in it
