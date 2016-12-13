@@ -25,8 +25,8 @@ private slots:
     void on_confirmButton_clicked();
     void onAddFriends(int grpSize);
 
-/*signals:
-    void updateTableInfo();*/
+signals:
+    void updateTableInfo();
 private:
     Ui::FriendsDialog *ui;
 

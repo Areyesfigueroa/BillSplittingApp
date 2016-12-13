@@ -80,22 +80,26 @@ void MainWindow::onGroupCreated()
     GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
 
     //getting latest groupName
-    Group* grp = _instance->groupRecords.fetchLatestRecord();
+    /*Group* grp = _instance->groupRecords.fetchLatestRecord();
     std::string grpName = grp->getName();
-    int grpSize = grp->getSize();
+    int grpSize = grp->getSize();*/
     createFriendsDialogConnection();
-    updateTable(grpName, grpSize); //wrong place, use when you create the group
+    //updateTable(grpName, grpSize); //wrong place, use when you create the group
 }
-/*
+
 void MainWindow::onUpdateTableInfo()
 {
     GroupRecords *_instance = GroupRecords::instance();
 
-    std::string gprName = _instance->groupRecords.fetchLatestRecord()->getName();
-    int grpSize = _instance->groupRecords.fetchLatestRecord()->getSize();
+    //std::string gprName = "";
+    //int grpSize = 0;
+    //gprName = _instance->groupRecords.fetchLatestRecord()->getGroupName();
+    //grpSize = _instance->groupRecords.fetchLatestRecord()->getGroupSize();
 
+    //std::string grpName = "Name";
+    //int grpSize = 0;
     //Adding name to listWidget
-    ui->listWidget->addItem(QString::fromStdString(grpName));
+    ui->listWidget->addItem(QString::fromStdString(_instance->groupRecords.fetchLatestRecord()->getGroupName()));
 
     //increment row
     tableRow++;
@@ -107,8 +111,8 @@ void MainWindow::onUpdateTableInfo()
 
 
     //Items need to be newed, new Items
-    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(grpName));
-    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(grpSize));
+    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(_instance->groupRecords.fetchLatestRecord()->getGroupName()));
+    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(_instance->groupRecords.fetchLatestRecord()->getGroupSize()));
     //QTableWidgetItem *itemGrpPeopleNames = new QTableWidgetItem()
 
     //Setting Item Placement
@@ -118,7 +122,7 @@ void MainWindow::onUpdateTableInfo()
     //increment item rows
     itemRow++;
     //QTableWidgetClear, deletes pointer and the data in it
-}*/
+}
 
 
 //DELETE FUNCTION
@@ -162,9 +166,9 @@ void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)
     Group* currGroup = GroupRecords::instance()->groupRecords.fetchRecordsByIndex(index);
 
     //overwrite the Group
-    currGroup->setName(newGrpName);
-    currGroup->setSize(newGrpSize);
-    ui->listWidget->currentItem()->setText(QString::fromStdString(currGroup->getName()));
+    currGroup->setGroupName(newGrpName);
+    currGroup->setGroupSize(newGrpSize);
+    ui->listWidget->currentItem()->setText(QString::fromStdString(currGroup->getGroupName()));
 }
 
 

@@ -48,7 +48,7 @@ bool Records<T>::checkForDuplicates(const std::string& var)
     {
         size_t index = elements.size() - 1;
 
-        while(std::strcmp(elements[index]->getName().c_str(), var.c_str()) != 0)
+        while(std::strcmp(elements[index]->getGroupName().c_str(), var.c_str()) != 0)
         {
             if(index != 0)
             {

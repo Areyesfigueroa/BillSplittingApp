@@ -13,19 +13,19 @@ groupNames
 groupSizes
 */
 
-class Group : public Person
+class Group : protected Person
 {
     std::string groupName;
     int groupSize;
 
 public:
     Group(std::string&, int);
-    void setName(std::string&);
-    void setSize(int);
+    void setGroupName(std::string&);
+    void setGroupSize(int);
     void addPerson(Person*);
 
-    const std::string& getName() const;
-    const int getSize() const;
+    const std::string& getGroupName() const;
+    const int getGroupSize() const;
 
 };
 

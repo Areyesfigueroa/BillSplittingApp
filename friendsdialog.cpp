@@ -28,7 +28,7 @@ FriendsDialog::FriendsDialog(QWidget *parent) :
     confirmButton = new QPushButton("Confirm", this);
     connect(confirmButton, SIGNAL(clicked()), this, SLOT(on_confirmButton_clicked()));
 
-    //connect(this, SIGNAL(updateTableInfo()), parent, SLOT(onUpdateTableInfo()));
+    connect(this, SIGNAL(updateTableInfo()), parent, SLOT(onUpdateTableInfo()));
 
 }
 
@@ -162,6 +162,6 @@ void FriendsDialog::personInfo( std::string& name,  std::string& phoneNum, std::
     Person *person = new Person(name, phoneNum, email);
 
     //adding Person info to groupInfo, Since there is no add friends window we can fethc the latest
-    //GroupRecords::instance()->groupRecords.fetchLatestRecord()->addPerson(person);
-    //updateTableInfo();
+    GroupRecords::instance()->groupRecords.fetchLatestRecord()->addPerson(person);
+    updateTableInfo();
 }
