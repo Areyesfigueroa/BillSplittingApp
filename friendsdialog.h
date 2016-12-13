@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QLineEdit>
-
+#include "person.h"
 
 namespace Ui {
 class FriendsDialog;
@@ -25,13 +25,16 @@ private slots:
     void on_confirmButton_clicked();
     void onAddFriends(int grpSize);
 
-
+/*signals:
+    void updateTableInfo();*/
 private:
     Ui::FriendsDialog *ui;
+
     //Data
     QPushButton *confirmButton;
     QVBoxLayout *multLayouts;
 
+    //Get user Input
     QLineEdit **nameTracker;
     QLineEdit **emailTracker;
     QLineEdit **phoneTracker;

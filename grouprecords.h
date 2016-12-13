@@ -1,6 +1,7 @@
 #ifndef GROUPRECORDS_H
 #define GROUPRECORDS_H
 
+#include <map>
 #include "group.h"
 #include "records.h"
 
@@ -19,7 +20,6 @@ public:
         }
         return r_instance;
     }
-
-    Records<Group*> groupRecords;
+    Records<Group*> groupRecords; //will handle the duplicate checking, can be deleted once all is complete
 };
 #endif // GROUPRECORDS_H

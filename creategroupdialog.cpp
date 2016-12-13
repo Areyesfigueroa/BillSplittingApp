@@ -44,10 +44,9 @@ void CreateGroupDialog::on_createButton_clicked()
 
         //adding group ref
         GroupRecords::instance()->groupRecords.addToRecords(groupPtr);
-
         //Clear the text boxes
-        this->ui->lineEditGroupName->clear();//works
         this->ui->lineEditGroupSize->clear();//works
+        this->ui->lineEditGroupName->clear();//works
 
         //Close the Dialog window
         this->close();

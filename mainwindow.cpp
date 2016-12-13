@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //init
     createGrpDialog = 0;
     editGroupDialog = 0;
-    friendsDialog = 0;
+    //friendsDialog = 0;
 
     //set up
     ui->setupUi(this);
@@ -61,7 +61,7 @@ void MainWindow::on_editButton_clicked()
 
     editGroupDialog->show();
 }
-
+/*
 void MainWindow::createFriendsDialogConnection()
 {
     if(!friendsDialog)
@@ -72,7 +72,7 @@ void MainWindow::createFriendsDialogConnection()
 
     friendsDialog->show();
 }
-
+*/
 //connected
 void MainWindow::onGroupCreated()
 {
@@ -83,11 +83,45 @@ void MainWindow::onGroupCreated()
     Group* grp = _instance->groupRecords.fetchLatestRecord();
     std::string grpName = grp->getName();
     int grpSize = grp->getSize();
-
-    updateTable(grpName, grpSize);
-    createFriendsDialogConnection();
+    //createFriendsDialogConnection();
+    updateTable(grpName, grpSize); //wrong place, use when you create the group
 }
+/*
+void MainWindow::onUpdateTableInfo()
+{
+    GroupRecords *_instance = GroupRecords::instance();
 
+    std::string gprName = _instance->groupRecords.fetchLatestRecord()->getName();
+    int grpSize = _instance->groupRecords.fetchLatestRecord()->getSize();
+
+    //Adding name to listWidget
+    ui->listWidget->addItem(QString::fromStdString(grpName));
+
+    //increment row
+    tableRow++;
+
+    //Setting Table Rows
+    tableWidget->setRowCount(tableRow);
+
+    //PeopleNames
+
+
+    //Items need to be newed, new Items
+    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(grpName));
+    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(grpSize));
+    //QTableWidgetItem *itemGrpPeopleNames = new QTableWidgetItem()
+
+    //Setting Item Placement
+    tableWidget->setItem(itemRow, itemColumn, itemGrpName);
+    tableWidget->setItem(itemRow, itemColumn + 1, itemGrpSize); //increment column
+    //tableWidget->setItem(itemRow, itemColumn + 2, );
+    //increment item rows
+    itemRow++;
+    //QTableWidgetClear, deletes pointer and the data in it
+}*/
+
+
+//DELETE FUNCTION
 void MainWindow::updateTable(const std::string& name, int& size)
 {
     //Adding name to listWidget
@@ -99,14 +133,18 @@ void MainWindow::updateTable(const std::string& name, int& size)
     //Setting Table Rows
     tableWidget->setRowCount(tableRow);
 
+    //PeopleNames
+
+
     //Items need to be newed, new Items
     QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(name));
     QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(size));
+    //QTableWidgetItem *itemGrpPeopleNames = new QTableWidgetItem()
 
     //Setting Item Placement
     tableWidget->setItem(itemRow, itemColumn, itemGrpName);
     tableWidget->setItem(itemRow, itemColumn + 1, itemGrpSize); //increment column
-
+    //tableWidget->setItem(itemRow, itemColumn + 2, );
     //increment item rows
     itemRow++;
 

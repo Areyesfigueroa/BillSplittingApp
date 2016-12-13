@@ -1,6 +1,7 @@
 #include "friendsdialog.h"
 #include "ui_friendsdialog.h"
 #include "person.h"
+#include "grouprecords.h"
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -26,6 +27,9 @@ FriendsDialog::FriendsDialog(QWidget *parent) :
 
     confirmButton = new QPushButton("Confirm", this);
     connect(confirmButton, SIGNAL(clicked()), this, SLOT(on_confirmButton_clicked()));
+
+    //connect(this, SIGNAL(updateTableInfo()), parent, SLOT(onUpdateTableInfo()));
+
 }
 
 FriendsDialog::~FriendsDialog()
@@ -47,6 +51,7 @@ void FriendsDialog::on_confirmButton_clicked()
                emailTracker[sIndex]->text().toStdString());
         sIndex++;
     }
+
 
     deleteTrackers();
 
@@ -163,4 +168,8 @@ QVBoxLayout* FriendsDialog::createUIAttributes()
 void FriendsDialog::personInfo( std::string& name,  std::string& phoneNum, std::string& email)
 {
     Person *person = new Person(name, phoneNum, email);
+
+    //adding Person info to groupInfo, Since there is no add friends window we can fethc the latest
+    //GroupRecords::instance()->groupRecords.fetchLatestRecord()->addPerson(person);
+    //updateTableInfo();
 }

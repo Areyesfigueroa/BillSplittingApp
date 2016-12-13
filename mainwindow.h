@@ -24,6 +24,7 @@ private slots:
     void on_plusButton_clicked();
     void onGroupCreated();
     void onEditGroup(std::string, int);
+    //void onUpdateTableInfo();
 
     void on_editButton_clicked();
 

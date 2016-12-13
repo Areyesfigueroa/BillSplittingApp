@@ -10,30 +10,30 @@ Person::Person(std::string& name, std::string& email, std::string& phoneNum)
 {}
 
 //setters
-void Person::setName(std::string& name)
+void Person::setPersonName(std::string& name)
 {
     this->name = name;
 }
 
-void Person::setEmail(std::string& email)
+void Person::setPersonEmail(std::string& email)
 {
     this->email = email;
 }
-void Person::setPhoneNum(std::string& phoneNum)
+void Person::setPersonPhoneNum(std::string& phoneNum)
 {
     this->phoneNum = phoneNum;
 }
 
 //getters
-const std::string& Person::getName()const
+const std::string& Person::getPersonName()const
 {
     return this->name;
 }
-const std::string& Person::getEmail()const
+const std::string& Person::getPersonEmail()const
 {
     return this->email;
 }
-const std::string& Person::getPhoneNum()const
+const std::string& Person::getPersonPhoneNum()const
 {
     return this->phoneNum;
 }

@@ -1,8 +1,7 @@
 #include "group.h"
 
 Group::Group(std::string& name, int size):groupName(name), groupSize(size)
-{
-}
+{}
 
 void Group::setName(std::string& name)
 {
@@ -20,4 +19,9 @@ const std::string& Group::getName() const
 const int Group::getSize() const
 {
     return groupSize;
+}
+
+void Group::addPerson(Person* person)
+{
+    peopleRecords.addToRecords(person);
 }
