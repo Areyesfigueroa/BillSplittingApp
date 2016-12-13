@@ -51,13 +51,11 @@ void FriendsDialog::on_confirmButton_clicked()
                emailTracker[sIndex]->text().toStdString());
         sIndex++;
     }
-
-
     deleteTrackers();
 
     sIndex = 0;
-    //Clear the trackers
 
+    //Clear the trackers
     clearLayout(childLayout, true);
     delete childLayout;
     this->close();
@@ -75,20 +73,14 @@ void FriendsDialog::deleteTrackers()
 
 void FriendsDialog::onAddFriends(int grpSize)
 {
-    QTextStream out(stdout);
-
     //Multiple Layouts
     multLayouts = new QVBoxLayout();
-    std::string multName = multLayouts->layout()->objectName().toStdString();
-    out << multName.c_str()<<endl;
 
     while(sIndex < grpSize)
     {
         multLayouts->addLayout(createUIAttributes());
         sIndex++;
     }
-    std::string name = confirmButton->text().toStdString();
-    out << name.c_str() <<endl;
     multLayouts->addWidget(confirmButton); //it is getting destroyed
     this->setLayout(multLayouts);
 }

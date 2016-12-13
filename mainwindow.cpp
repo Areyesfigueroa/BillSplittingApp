@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //init
     createGrpDialog = 0;
     editGroupDialog = 0;
-    //friendsDialog = 0;
+    friendsDialog = 0;
 
     //set up
     ui->setupUi(this);
@@ -61,7 +61,7 @@ void MainWindow::on_editButton_clicked()
 
     editGroupDialog->show();
 }
-/*
+
 void MainWindow::createFriendsDialogConnection()
 {
     if(!friendsDialog)
@@ -72,7 +72,7 @@ void MainWindow::createFriendsDialogConnection()
 
     friendsDialog->show();
 }
-*/
+
 //connected
 void MainWindow::onGroupCreated()
 {
@@ -83,7 +83,7 @@ void MainWindow::onGroupCreated()
     Group* grp = _instance->groupRecords.fetchLatestRecord();
     std::string grpName = grp->getName();
     int grpSize = grp->getSize();
-    //createFriendsDialogConnection();
+    createFriendsDialogConnection();
     updateTable(grpName, grpSize); //wrong place, use when you create the group
 }
 /*
