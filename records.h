@@ -16,6 +16,7 @@ public:
     T fetchRecordsByIndex(int index);
     T fetchLatestRecord();
     bool checkForDuplicates(const std::string&);
+    int getSize();
 };
 
 
@@ -64,5 +65,10 @@ bool Records<T>::checkForDuplicates(const std::string& var)
     }
 }
 
+template<class T>
+int Records<T>::getSize()
+{
+    return elements.size();
+}
 
 #endif // RECORDS_H

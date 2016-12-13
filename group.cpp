@@ -20,13 +20,24 @@ const int Group::getGroupSize() const
 {
     return groupSize;
 }
-
+//Person functions
 void Group::addPerson(Person* person)
 {
     peopleRecords.addToRecords(person);
 }
 
-Person* Group::getLastestPerson()
+Person* Group::getLatestPerson()
 {
     return peopleRecords.fetchLatestRecord();
 }
+
+int Group::getPeopleCount()
+{
+    return peopleRecords.getSize();
+}
+
+Person* Group::getPersonByIndex(int i)
+{
+    return peopleRecords.fetchRecordsByIndex(i);
+}
+

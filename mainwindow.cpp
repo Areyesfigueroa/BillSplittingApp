@@ -93,13 +93,22 @@ void MainWindow::onUpdateTableInfo()
 
     std::string groupName = _instance->groupRecords.fetchLatestRecord()->getGroupName();
     int size = _instance->groupRecords.fetchLatestRecord()->getGroupSize();
+
+    //Get group ref
     Group* group = _instance->groupRecords.fetchLatestRecord();
 
-    Person* person = group->getLastestPerson();
-    std::string personName = person->getPersonName();
+    //PeopleHelper variables
+    int peopleCount = group->getPeopleCount();
+    std::string personName = "";
 
+    //go through the people records and get their names
+    for(int i = 0; i < peopleCount; i++)
+    {
+         Person* person = group->getPersonByIndex(i);
+         personName = personName +", "+ person->getPersonName();
+    }
 
-    //Adding name to listWidget
+    //Adding group name to listWidget
     ui->listWidget->addItem(QString::fromStdString(groupName));
 
     //increment row

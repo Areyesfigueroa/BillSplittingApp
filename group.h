@@ -22,9 +22,12 @@ public:
     Group(std::string&, int);
     void setGroupName(std::string&);
     void setGroupSize(int);
-    void addPerson(Person*);
-    Person* getLastestPerson();
 
+    //People Functions
+    void addPerson(Person*);
+    Person* getLatestPerson();
+    Person* getPersonByIndex(int i);
+    int getPeopleCount();
 
     const std::string& getGroupName() const;
     const int getGroupSize() const;

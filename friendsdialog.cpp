@@ -51,6 +51,7 @@ void FriendsDialog::on_confirmButton_clicked()
                emailTracker[sIndex]->text().toStdString());
         sIndex++;
     }
+    updateTableInfo();
     deleteTrackers();
 
     sIndex = 0;
@@ -163,5 +164,4 @@ void FriendsDialog::personInfo( std::string& name,  std::string& phoneNum, std::
 
     //adding Person info to groupInfo, Since there is no add friends window we can fethc the latest
     GroupRecords::instance()->groupRecords.fetchLatestRecord()->addPerson(person);
-    updateTableInfo();
 }
