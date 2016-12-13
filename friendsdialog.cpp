@@ -9,7 +9,7 @@
 #include <string>
 #include <QString>
 
-//default
+//This Window is if you create all new friends.
 int FriendsDialog::sIndex = 0;
 
 FriendsDialog::FriendsDialog(QWidget *parent) :
@@ -42,11 +42,14 @@ void FriendsDialog::on_confirmButton_clicked()
     //Passing info
     while(sIndex < maxIndex)
     {
-    personInfo(nameTracker[sIndex]->text().toStdString(),
+        personInfo(nameTracker[sIndex]->text().toStdString(),
                phoneTracker[sIndex]->text().toStdString(),
                emailTracker[sIndex]->text().toStdString());
-    sIndex++;
+        sIndex++;
     }
+
+    deleteTrackers();
+
     sIndex = 0;
     //Clear the trackers
 
@@ -57,7 +60,12 @@ void FriendsDialog::on_confirmButton_clicked()
 
 void FriendsDialog::deleteTrackers()
 {
-
+    for(int i = 0; i < sIndex; ++i)
+    {
+        delete [] nameTracker[i];
+        delete [] phoneTracker[i];
+        delete [] emailTracker[i];
+    }
 }
 
 void FriendsDialog::onAddFriends(int grpSize)

@@ -50,6 +50,7 @@ void MainWindow::on_plusButton_clicked()
     }
     createGrpDialog->show();
 }
+
 void MainWindow::on_editButton_clicked()
 {
     if(!editGroupDialog)
@@ -85,8 +86,6 @@ void MainWindow::onGroupCreated()
 
     updateTable(grpName, grpSize);
     createFriendsDialogConnection();
-
-
 }
 
 void MainWindow::updateTable(const std::string& name, int& size)
