@@ -115,7 +115,7 @@ void MainWindow::onUpdateTableInfo()
     Group* group = _instance->groupRecords.fetchLatestRecord();
 
     //PeopleHelper variables
-    int peopleCount = group->getPeopleCount();
+    size_t peopleCount = group->getPeopleCount();
     std::string personName = "";
 
     //go through the people records and get their names

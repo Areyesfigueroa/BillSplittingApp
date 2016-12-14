@@ -19,10 +19,8 @@ public:
 
     void comboBoxUpdate();
     void insertGroupToComboBox();
-    void insertPersonToComboBox();
+    void insertSplitOptionsToComboBox();
 
-    void setCurrentGroup(Group*);
-    Group* getCurrentGroup();
 signals:
     void createBillClicked();
     void billCreated();
@@ -31,6 +29,10 @@ private slots:
     void on_confirmBillButton_clicked();
 
     void on_comboBoxGroupList_currentIndexChanged(int index);
+
+    void on_comboBoxSplitOptions_currentIndexChanged(int index);
+
+    void on_lineEditTotalBill_textEdited(const QString &arg1);
 
 private:
     Ui::BillOptionsDialog *ui;

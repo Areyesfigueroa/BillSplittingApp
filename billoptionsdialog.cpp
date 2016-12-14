@@ -21,6 +21,7 @@ void BillOptionsDialog::comboBoxUpdate()
     if(!GroupRecords::instance()->groupRecords.isEmpty())
     {
         insertGroupToComboBox();
+        insertSplitOptionsToComboBox();
         billCreated();//signal update info on the mainWindow//May not have to
     }
     else
@@ -46,17 +47,11 @@ void BillOptionsDialog::insertGroupToComboBox()
     }
 }
 
-//this depends on the group selected, Will work Once for now
-void BillOptionsDialog::insertPersonToComboBox()
-{
-}
-
 void BillOptionsDialog::on_confirmBillButton_clicked()
 {
     ui->comboBoxPaidBy->clear();
-
     ui->comboBoxGroupList->clear();
-    //ui->comboBoxSplitOptions->clear();
+    ui->comboBoxSplitOptions->clear();
 
     this->close();
 }
@@ -64,6 +59,7 @@ void BillOptionsDialog::on_confirmBillButton_clicked()
 //activates when you change the index
 void BillOptionsDialog::on_comboBoxGroupList_currentIndexChanged(int index)
 {
+    ui->comboBoxPaidBy->clear();
     if(index == -1)
     {
         return;
@@ -88,4 +84,26 @@ void BillOptionsDialog::on_comboBoxGroupList_currentIndexChanged(int index)
             }
         }
     }
+}
+
+void BillOptionsDialog::insertSplitOptionsToComboBox()
+{
+    ui->comboBoxSplitOptions->addItem("Equally");
+    ui->comboBoxSplitOptions->addItem("Individually");
+    ui->comboBoxSplitOptions->addItem("They owe full ammount");
+    ui->comboBoxSplitOptions->addItem("You owe full ammount");
+}
+
+void BillOptionsDialog::on_comboBoxSplitOptions_currentIndexChanged(int index)
+{
+    //Changes depending on how you want to split your bills
+    if(index == 0) //Equal
+    {
+
+    }
+}
+
+void BillOptionsDialog::on_lineEditTotalBill_textEdited(const QString &arg1)
+{
+    int total = arg1.toInt();
 }
