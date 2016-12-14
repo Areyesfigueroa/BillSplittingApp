@@ -27,7 +27,7 @@ public:
     void addPerson(Person*);
     Person* getLatestPerson();
     Person* getPersonByIndex(int i);
-    int getPeopleCount();
+    size_t getPeopleCount();
 
     const std::string& getGroupName() const;
     const int getGroupSize() const;

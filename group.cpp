@@ -31,7 +31,7 @@ Person* Group::getLatestPerson()
     return peopleRecords.fetchLatestRecord();
 }
 
-int Group::getPeopleCount()
+size_t Group::getPeopleCount()
 {
     return peopleRecords.getSize();
 }

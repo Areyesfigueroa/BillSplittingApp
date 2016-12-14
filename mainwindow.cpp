@@ -35,9 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Init Table Header
     tableWidget->setHorizontalHeaderLabels(QStringList()<<"Group Name"<<"Group Size"<< "People" << "Total Bill");
-
-    //Connect the signal for to update the bill dialog
-    connect(this, SIGNAL(updateBillComboBoxes()), billOptionsDialog, SLOT(updatingBillComboBoxes()));
 }
 
 MainWindow::~MainWindow()
@@ -71,7 +68,6 @@ void MainWindow::on_createBillButton_clicked()
     if(!billOptionsDialog)
     {
         billOptionsDialog = new BillOptionsDialog(this);
-        //emit updateBillComboBoxes(); //signal
         connect(billOptionsDialog, SIGNAL(billCreated()), this, SLOT(onBillCreated())); //Updates the table
     }
     billOptionsDialog->comboBoxUpdate();
@@ -161,7 +157,6 @@ void MainWindow::onUpdateTableInfo()
     itemRow++;
     //QTableWidgetClear, deletes pointer and the data in it
 }
-
 
 //DELETE FUNCTION
 void MainWindow::updateTable(const std::string& name, int& size)

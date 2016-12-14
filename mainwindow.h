@@ -32,9 +32,6 @@ private slots:
     void on_createBillButton_clicked();
     void onBillCreated();
 
-signals:
-    void updateBillComboBoxes();
-
 private:
     //Windows
     Ui::MainWindow *ui;
