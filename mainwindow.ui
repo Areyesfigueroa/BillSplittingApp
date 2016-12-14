@@ -51,7 +51,7 @@
       <x>20</x>
       <y>160</y>
       <width>281</width>
-      <height>21</height>
+      <height>34</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -108,8 +108,8 @@
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>150</y>
+      <x>380</x>
+      <y>160</y>
       <width>431</width>
       <height>401</height>
      </rect>
@@ -118,8 +118,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>120</y>
+      <x>390</x>
+      <y>130</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -133,6 +133,19 @@
     </property>
     <property name="text">
      <string>Data:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="createBillButton">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>560</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CreateBill</string>
     </property>
    </widget>
   </widget>

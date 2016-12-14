@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     createGrpDialog = 0;
     editGroupDialog = 0;
     friendsDialog = 0;
+    billOptionsDialog = 0;
 
     //set up
     ui->setupUi(this);
@@ -62,6 +63,16 @@ void MainWindow::on_editButton_clicked()
     editGroupDialog->show();
 }
 
+void MainWindow::on_createBillButton_clicked()
+{
+    if(!billOptionsDialog)
+    {
+        billOptionsDialog = new BillOptionsDialog(this);
+        //connect(billOptionsDialog, SIGNAL(), this, SLOT());
+    }
+    billOptionsDialog->show();
+}
+
 void MainWindow::createFriendsDialogConnection()
 {
     if(!friendsDialog)
@@ -73,11 +84,13 @@ void MainWindow::createFriendsDialogConnection()
     friendsDialog->show();
 }
 
+
+
 //connected
 void MainWindow::onGroupCreated()
 {
     //getting instance
-    GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
+    //GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
 
     //getting latest groupName
     /*Group* grp = _instance->groupRecords.fetchLatestRecord();
@@ -165,8 +178,6 @@ void MainWindow::updateTable(const std::string& name, int& size)
     //QTableWidgetClear, deletes pointer and the data in it
 }
 
-
-
 //connected
 void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)
 {
@@ -180,5 +191,6 @@ void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)
     currGroup->setGroupSize(newGrpSize);
     ui->listWidget->currentItem()->setText(QString::fromStdString(currGroup->getGroupName()));
 }
+
 
 

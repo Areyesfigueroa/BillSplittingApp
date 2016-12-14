@@ -7,6 +7,7 @@
 #include "creategroupdialog.h"
 #include "editgroupdialog.h"
 #include "friendsdialog.h"
+#include "billoptionsdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +29,8 @@ private slots:
 
     void on_editButton_clicked();
 
+    void on_createBillButton_clicked();
+
 private:
     //Windows
     Ui::MainWindow *ui;
@@ -35,6 +38,7 @@ private:
     CreateGroupDialog *createGrpDialog;
     EditGroupDialog *editGroupDialog;
     FriendsDialog *friendsDialog;
+    BillOptionsDialog *billOptionsDialog;
 
     //Data
     static int tableRow;
