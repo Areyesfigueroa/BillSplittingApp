@@ -35,6 +35,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Init Table Header
     tableWidget->setHorizontalHeaderLabels(QStringList()<<"Group Name"<<"Group Size"<< "People" << "Total Bill");
+
+    //Connect the signal for to update the bill dialog
+    connect(this, SIGNAL(updateBillComboBoxes()), billOptionsDialog, SLOT(updatingBillComboBoxes()));
 }
 
 MainWindow::~MainWindow()
@@ -68,8 +71,10 @@ void MainWindow::on_createBillButton_clicked()
     if(!billOptionsDialog)
     {
         billOptionsDialog = new BillOptionsDialog(this);
-        //connect(billOptionsDialog, SIGNAL(), this, SLOT());
+        //emit updateBillComboBoxes(); //signal
+        connect(billOptionsDialog, SIGNAL(billCreated()), this, SLOT(onBillCreated())); //Updates the table
     }
+    billOptionsDialog->comboBoxUpdate();
     billOptionsDialog->show();
 }
 
@@ -84,7 +89,10 @@ void MainWindow::createFriendsDialogConnection()
     friendsDialog->show();
 }
 
-
+void MainWindow::onBillCreated()
+{
+    //update table
+}
 
 //connected
 void MainWindow::onGroupCreated()
@@ -118,7 +126,14 @@ void MainWindow::onUpdateTableInfo()
     for(int i = 0; i < peopleCount; i++)
     {
          Person* person = group->getPersonByIndex(i);
-         personName = personName +", "+ person->getPersonName();
+         if(i > 0)
+         {
+             personName = personName +", "+ person->getPersonName();
+         }
+         else
+         {
+             personName = person->getPersonName();
+         }
     }
 
     //Adding group name to listWidget

@@ -80,7 +80,7 @@
       <widget class="QPushButton" name="negButton">
        <property name="font">
         <font>
-         <pointsize>15</pointsize>
+         <pointsize>10</pointsize>
          <weight>50</weight>
          <bold>false</bold>
         </font>

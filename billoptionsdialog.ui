@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>420</width>
-    <height>190</height>
+    <height>342</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,11 +33,24 @@
     <string>Bill Settings</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="confirmBillButton">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>280</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Confirm</string>
+   </property>
+  </widget>
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>100</y>
+     <y>160</y>
      <width>351</width>
      <height>22</height>
     </rect>
@@ -72,6 +85,33 @@
     </item>
     <item>
      <widget class="QComboBox" name="comboBoxSplitOptions"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>100</y>
+     <width>191</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>GroupChosen:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="comboBoxGroupList"/>
     </item>
    </layout>
   </widget>

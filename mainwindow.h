@@ -30,6 +30,10 @@ private slots:
     void on_editButton_clicked();
 
     void on_createBillButton_clicked();
+    void onBillCreated();
+
+signals:
+    void updateBillComboBoxes();
 
 private:
     //Windows
