@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Init Table Row and Column
     tableWidget->setColumnCount(4);
-    tableWidget->setRowCount(0);
+    tableWidget->setRowCount(4);
 
     //Init Table Header
     tableWidget->setHorizontalHeaderLabels(QStringList()<<"Group Name"<<"Group Size"<< "People" << "Total Bill");
@@ -92,8 +92,8 @@ void MainWindow::onBillCreated(float totalBill)
     //use lambda to transfer totalBill onto onUpdateTable
     //Lambda will not go out of scope
     //one of its core uses.
-    QMessageBox::information(this, "Title",QString::number(totalBill));
-    auto getTotalBill = [&]()->int{return totalBill;};
+    //QMessageBox::information(this, "Title",QString::number(totalBill));
+    auto getTotalBill = [&totalBill]()->int{return totalBill;};
     updateBill(getTotalBill);
 }
 
@@ -111,7 +111,7 @@ void MainWindow::onUpdateTableInfo()
 void MainWindow::updateBill(std::function<int()> getTotalBill)
 {
     QTableWidgetItem *itemGrpTotalBill = new QTableWidgetItem(QString::number(getTotalBill()));
-    tableWidget->setItem(itemRow, itemColumn + 3, itemGrpTotalBill); //won't be at the right location
+    tableWidget->setItem(itemRow - 1, itemColumn + 3, itemGrpTotalBill); //won't be at the right location
 }
 
 void MainWindow::updateTable()
