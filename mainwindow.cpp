@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "grouprecords.h"
 #include <QTextStream>
+#include <QMessageBox>
+#include <functional>
 
 //list lives here
 //Check with teacher to choose the most optimal way of checking for duplicates
@@ -68,7 +70,7 @@ void MainWindow::on_createBillButton_clicked()
     if(!billOptionsDialog)
     {
         billOptionsDialog = new BillOptionsDialog(this);
-        connect(billOptionsDialog, SIGNAL(billCreated()), this, SLOT(onBillCreated())); //Updates the table
+        connect(billOptionsDialog, SIGNAL(billCreated(float)), this, SLOT(onBillCreated(float))); //Updates the table
     }
     billOptionsDialog->comboBoxUpdate();
     billOptionsDialog->show();
@@ -84,27 +86,35 @@ void MainWindow::createFriendsDialogConnection()
 
     friendsDialog->show();
 }
-
-void MainWindow::onBillCreated()
+void MainWindow::onBillCreated(float totalBill)
 {
     //update table
+    //use lambda to transfer totalBill onto onUpdateTable
+    //Lambda will not go out of scope
+    //one of its core uses.
+    QMessageBox::information(this, "Title",QString::number(totalBill));
+    auto getTotalBill = [&]()->int{return totalBill;};
+    updateBill(getTotalBill);
 }
 
 //connected
 void MainWindow::onGroupCreated()
 {
-    //getting instance
-    //GroupRecords *_instance = GroupRecords::instance(); //Helps keep the code shorter
-
-    //getting latest groupName
-    /*Group* grp = _instance->groupRecords.fetchLatestRecord();
-    std::string grpName = grp->getName();
-    int grpSize = grp->getSize();*/
     createFriendsDialogConnection();
-    //updateTable(grpName, grpSize); //wrong place, use when you create the group
 }
 
 void MainWindow::onUpdateTableInfo()
+{
+    updateTable();
+}
+
+void MainWindow::updateBill(std::function<int()> getTotalBill)
+{
+    QTableWidgetItem *itemGrpTotalBill = new QTableWidgetItem(QString::number(getTotalBill()));
+    tableWidget->setItem(itemRow, itemColumn + 3, itemGrpTotalBill); //won't be at the right location
+}
+
+void MainWindow::updateTable()
 {
     GroupRecords *_instance = GroupRecords::instance();
 
@@ -148,45 +158,17 @@ void MainWindow::onUpdateTableInfo()
     QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(groupName));
     QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(size));
     QTableWidgetItem *itemGrpPeopleNames = new QTableWidgetItem(QString::fromStdString(personName));
-
+    //QTableWidgetItem *itemGrpTotalBill = new QTableWidgetItem(QString::number(getTotalBill()));
     //Setting Item Placement
     tableWidget->setItem(itemRow, itemColumn, itemGrpName);
     tableWidget->setItem(itemRow, itemColumn + 1, itemGrpSize); //increment column
     tableWidget->setItem(itemRow, itemColumn + 2, itemGrpPeopleNames);
+    //tableWidget->setItem(itemRow, itemColumn + 3, itemGrpTotalBill);
     //increment item rows
     itemRow++;
     //QTableWidgetClear, deletes pointer and the data in it
 }
 
-//DELETE FUNCTION
-void MainWindow::updateTable(const std::string& name, int& size)
-{
-    //Adding name to listWidget
-    ui->listWidget->addItem(QString::fromStdString(name));
-
-    //increment row
-    tableRow++;
-
-    //Setting Table Rows
-    tableWidget->setRowCount(tableRow);
-
-    //PeopleNames
-
-
-    //Items need to be newed, new Items
-    QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(name));
-    QTableWidgetItem *itemGrpSize = new QTableWidgetItem(QString::number(size));
-    //QTableWidgetItem *itemGrpPeopleNames = new QTableWidgetItem()
-
-    //Setting Item Placement
-    tableWidget->setItem(itemRow, itemColumn, itemGrpName);
-    tableWidget->setItem(itemRow, itemColumn + 1, itemGrpSize); //increment column
-    //tableWidget->setItem(itemRow, itemColumn + 2, );
-    //increment item rows
-    itemRow++;
-
-    //QTableWidgetClear, deletes pointer and the data in it
-}
 
 //connected
 void MainWindow::onEditGroup(std::string newGrpName, int newGrpSize)

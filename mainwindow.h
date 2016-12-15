@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QListWidget>
 #include <QTableWidget>
+#include <functional>
 #include "creategroupdialog.h"
 #include "editgroupdialog.h"
 #include "friendsdialog.h"
@@ -20,7 +21,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
+    void createFriendsDialogConnection();
+    void updateTable();
+    void updateBill(std::function<int()>);
 private slots:
     void on_plusButton_clicked();
     void onGroupCreated();
@@ -30,7 +33,7 @@ private slots:
     void on_editButton_clicked();
 
     void on_createBillButton_clicked();
-    void onBillCreated();
+    void onBillCreated(float);
 
 private:
     //Windows
@@ -44,10 +47,6 @@ private:
     //Data
     static int tableRow;
     static int itemRow, itemColumn;
-
-    //Functions
-    void updateTable(const std::string&, int&);
-    void createFriendsDialogConnection();
 
 };
 

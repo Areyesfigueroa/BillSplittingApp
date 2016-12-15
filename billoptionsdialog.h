@@ -31,14 +31,14 @@ public:
     void addIndividualSetting();
     void owedYouFullAmmount();
     void youOweFullAmmount();
-    void createWindows(int, float);
+    void createWindows(int, float, bool);
     void deleteWindows();
 
     void reset();
 
 signals:
     void createBillClicked();
-    void billCreated();
+    void billCreated(float);
 
 private slots:
     void on_confirmBillButton_clicked();
