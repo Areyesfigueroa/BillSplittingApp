@@ -2,7 +2,12 @@
 #define BILLOPTIONSDIALOG_H
 
 #include <QDialog>
+#include <QHBoxLayout>
+#include <QLineEdit>
+#include <QLabel>
+
 #include "group.h"
+
 
 namespace Ui {
 class BillOptionsDialog;
@@ -21,6 +26,16 @@ public:
     void insertGroupToComboBox();
     void insertSplitOptionsToComboBox();
 
+    void addEqualSetting();
+    int getEqualAmmount() const;
+    void addIndividualSetting();
+    void owedYouFullAmmount();
+    void youOweFullAmmount();
+    void createWindows(int, float);
+    void deleteWindows();
+
+    void reset();
+
 signals:
     void createBillClicked();
     void billCreated();
@@ -32,12 +47,20 @@ private slots:
 
     void on_comboBoxSplitOptions_currentIndexChanged(int index);
 
-    void on_lineEditTotalBill_textEdited(const QString &arg1);
+    void on_lineEditTotalBill_editingFinished();
 
 private:
     Ui::BillOptionsDialog *ui;
 
     Group* tempGrp;
+
+    //Windows Creation
+    QHBoxLayout** horBoxLayout;
+    QLineEdit** lineEditBillAmmount;
+    QLabel** labelPersonName;
+
+    //data
+    float evenAmmount;
 };
 
 #endif // BILLOPTIONSDIALOG_H
