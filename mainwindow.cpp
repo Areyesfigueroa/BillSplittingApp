@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Init Table Row and Column
     tableWidget->setColumnCount(4);
-    tableWidget->setRowCount(4);
+    tableWidget->setRowCount(0);
 
     //Init Table Header
     tableWidget->setHorizontalHeaderLabels(QStringList()<<"Group Name"<<"Group Size"<< "People" << "Total Bill");
