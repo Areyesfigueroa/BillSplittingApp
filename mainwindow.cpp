@@ -88,13 +88,14 @@ void MainWindow::createFriendsDialogConnection()
 }
 void MainWindow::onBillCreated(float totalBill)
 {
-    //update table
-    //use lambda to transfer totalBill onto onUpdateTable
-    //Lambda will not go out of scope
-    //one of its core uses.
-    //QMessageBox::information(this, "Title",QString::number(totalBill));
     auto getTotalBill = [&totalBill]()->int{return totalBill;};
     updateBill(getTotalBill);
+}
+
+void MainWindow::updateBill(std::function<int()> getTotalBill) //passing lambda function
+{
+    QTableWidgetItem *itemGrpTotalBill = new QTableWidgetItem(QString::number(getTotalBill())); //insert lambda result onto QItem
+    tableWidget->setItem(itemRow - 1, itemColumn + 3, itemGrpTotalBill); //display on the table
 }
 
 //connected
@@ -108,11 +109,7 @@ void MainWindow::onUpdateTableInfo()
     updateTable();
 }
 
-void MainWindow::updateBill(std::function<int()> getTotalBill)
-{
-    QTableWidgetItem *itemGrpTotalBill = new QTableWidgetItem(QString::number(getTotalBill()));
-    tableWidget->setItem(itemRow - 1, itemColumn + 3, itemGrpTotalBill); //won't be at the right location
-}
+
 
 void MainWindow::updateTable()
 {
