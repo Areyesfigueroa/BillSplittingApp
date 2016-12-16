@@ -4,6 +4,7 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <functional>
+#include "testfunctions.h"
 
 //list lives here
 //Check with teacher to choose the most optimal way of checking for duplicates
@@ -24,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
     editGroupDialog = 0;
     friendsDialog = 0;
     billOptionsDialog = 0;
+
+    // ##################################
+    TestFunctions::TestFunction();
+
 
     //set up
     ui->setupUi(this);
