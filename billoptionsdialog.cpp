@@ -61,6 +61,8 @@ void BillOptionsDialog::insertGroupToComboBox()
 //Activates when you press the confirm button
 void BillOptionsDialog::on_confirmBillButton_clicked()
 {
+    addIndividualBills();
+
     ui->comboBoxPaidBy->clear();
     ui->comboBoxGroupList->clear();
     ui->comboBoxSplitOptions->clear();
@@ -68,6 +70,23 @@ void BillOptionsDialog::on_confirmBillButton_clicked()
     //just save the total bill for now
     billCreated(ui->lineEditTotalBill->text().toFloat()); //goes back to main
     this->close();
+}
+
+void BillOptionsDialog::addIndividualBills()
+{
+    //use the index to fetchgroupByindex
+    Group* currentGrp = getGroupByIndex(ui->comboBoxGroupList->currentIndex());
+
+    //size of people
+    size_t size = currentGrp->getPeopleCount();
+
+    for(int i = 0; i < size; i++)
+    {
+        //got the people payment ammount, got total bill
+        //how much do people owe
+        float bill = lineEditBillAmmount[i]->text().toFloat();
+        currentGrp->getPersonByIndex(i)->addToBillRecords(currentGrp->getGroupName(), bill); //this is how much you owe
+    }
 }
 
 //activates when you change the index of the group
@@ -196,7 +215,7 @@ void BillOptionsDialog::addIndividualSetting()
         counter++;
     }
     total = total - ui->lineEditTotalBill->text().toFloat(); //print on screen
-
+    //this is the group's total bill
     //update label
 }
 

@@ -35,6 +35,7 @@ public:
     void deleteWindows();
 
     void reset();
+    void addIndividualBills();
 
 signals:
     void createBillClicked();

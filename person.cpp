@@ -37,3 +37,18 @@ const std::string& Person::getPersonPhoneNum()const
 {
     return this->phoneNum;
 }
+
+//instance of the person keeps track of its bills individually
+void Person::addToBillRecords(std::string groupName, float value)
+{
+    billRecords[groupName] = value;
+}
+float Person::getBillByKey(std::string groupName)
+{
+   return billRecords[groupName];
+}
+void Person::eraseBill(std::string groupName)
+{
+    std::map<std::string, float>::iterator it = billRecords.find(groupName);
+    billRecords.erase(it);
+}
