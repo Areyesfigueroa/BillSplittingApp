@@ -1,7 +1,6 @@
 #include "billoptionsdialog.h"
 #include "ui_billoptionsdialog.h"
 #include "grouprecords.h"
-#include "group.h"
 #include <algorithm>
 #include <QMessageBox>
 
@@ -10,10 +9,10 @@ BillOptionsDialog::BillOptionsDialog(QWidget *parent) :
     ui(new Ui::BillOptionsDialog)
 {
 
-    //dynamic double pointer arrays
+    //dynamic double pointer arrays, init
     horBoxLayout = new QHBoxLayout*[0];
     lineEditBillAmmount = new QLineEdit*[0];
-    labelPersonName = new QLabel*[0]; //label points to new QLabel, Qlabel points to array
+    labelPersonName = new QLabel*[0];
 
     ui->setupUi(this);
 }
@@ -46,12 +45,11 @@ void BillOptionsDialog::insertGroupToComboBox()
     //get the group records size
     size_t grpRecCount = GroupRecords::instance()->groupRecords.getSize();
 
-    Group* groups = 0;
     //Loop to get all the groupsName
     for(int i = 0; i < grpRecCount; i++)
     {
         //get the group
-        groups  = getGroupByIndex(i);
+        Group* groups  = getGroupByIndex(i);
 
         //adding the group name onto the box
         ui->comboBoxGroupList->addItem(QString::fromStdString(groups->getGroupName()));
@@ -67,7 +65,7 @@ void BillOptionsDialog::on_confirmBillButton_clicked()
     ui->comboBoxGroupList->clear();
     ui->comboBoxSplitOptions->clear();
 
-    //just save the total bill for now
+    //saves the total bill for now
     billCreated(ui->lineEditTotalBill->text().toFloat()); //goes back to main
 
     this->close();
@@ -83,8 +81,6 @@ void BillOptionsDialog::addIndividualBills()
 
     for(int i = 0; i < size; i++)
     {
-        //got the people payment ammount, got total bill
-        //how much do people owe
         float bill = lineEditBillAmmount[i]->text().toFloat();
         currentGrp->getPersonByIndex(i)->addToBillRecords(currentGrp->getGroupName(), bill); //this is how much you owe
     }
@@ -94,7 +90,7 @@ void BillOptionsDialog::addIndividualBills()
 void BillOptionsDialog::on_comboBoxGroupList_currentIndexChanged(int index)
 {
     ui->comboBoxPaidBy->clear();
-    if(index == -1)
+    if(index == -1) //index turns to negative one when closing or opening this window
     {
         return;
     }
@@ -112,6 +108,7 @@ void BillOptionsDialog::on_comboBoxGroupList_currentIndexChanged(int index)
             //size of people
             size_t size = currentGrp->getPeopleCount();
 
+            //Adding people to combo box
             for(int i = 0; i < size; i++)
             {
                 ui->comboBoxPaidBy->addItem(QString::fromStdString(getPersonNameByIndex(currentGrp, i)));
@@ -131,8 +128,9 @@ void BillOptionsDialog::insertSplitOptionsToComboBox()
 {
     ui->comboBoxSplitOptions->addItem("Equally"); //0
     ui->comboBoxSplitOptions->addItem("Individually"); //1
-   // ui->comboBoxSplitOptions->addItem("They owe full ammount"); //2
-   // ui->comboBoxSplitOptions->addItem("You owe full ammount"); //3
+    //FUTURE IMPLEMENTATION
+    //ui->comboBoxSplitOptions->addItem("They owe full ammount"); //2
+    //ui->comboBoxSplitOptions->addItem("You owe full ammount"); //3
 }
 
 void BillOptionsDialog::on_comboBoxSplitOptions_currentIndexChanged(int index)
@@ -150,6 +148,7 @@ void BillOptionsDialog::on_comboBoxSplitOptions_currentIndexChanged(int index)
         break;
     }
 }
+
 void BillOptionsDialog::addEqualSetting()
 {
     //Adds groups peoples bills evenly
@@ -167,12 +166,10 @@ int BillOptionsDialog::getEqualAmmount() const
 
 void BillOptionsDialog::createWindows(int grpIndex, float billAmmount, bool isEditable = false)
 {
-    //create windows for people to see their bills
     Group* grp = getGroupByIndex(grpIndex);
 
     for(int i = 0; i < grp->getPeopleCount(); i++)
     {
-        //Make sure to delete
         horBoxLayout[i] = new QHBoxLayout();
         labelPersonName[i] = new QLabel(QString::fromStdString(getPersonNameByIndex(grp, i)));
         lineEditBillAmmount[i] = new QLineEdit(QString::number(billAmmount));
@@ -199,11 +196,6 @@ void BillOptionsDialog::deleteWindows()
 
 void BillOptionsDialog::addIndividualSetting()
 {
-    //get all people records from this group
-    //create multiple line edits so that you can you can input their ammounts individually
-    //create trackers for the line edits do that you can track the information
-    //formula: add all the individual ammounts - the total ammount input it.
-
     //get the current groupIndex
     int index = ui->comboBoxGroupList->currentIndex();
     Group* group = getGroupByIndex(index);
@@ -215,9 +207,7 @@ void BillOptionsDialog::addIndividualSetting()
         total +=lineEditBillAmmount[counter]->text().toFloat();
         counter++;
     }
-    total = total - ui->lineEditTotalBill->text().toFloat(); //print on screen
-    //this is the group's total bill
-    //update label
+    total = total - ui->lineEditTotalBill->text().toFloat(); //NOT IMPLEMENTED Future: print on screen
 }
 
 void BillOptionsDialog::on_lineEditTotalBill_editingFinished()
@@ -231,7 +221,7 @@ void BillOptionsDialog::on_lineEditTotalBill_editingFinished()
     if(ui->comboBoxSplitOptions->currentIndex() == 0)
     {
         addEqualSetting();
-        createWindows(index, getEqualAmmount());
+        createWindows(index, getEqualAmmount(), false);
     }
     else if(ui->comboBoxSplitOptions->currentIndex() == 1)
     {

@@ -4,6 +4,9 @@
 #include "person.h"
 #include "records.h"
 
+//FUTURE IMPLEMENTATION
+//friend list instead of having to keep inputting the same user info.
+
 class PeopleRecords
 {
     static PeopleRecords *p_instance;

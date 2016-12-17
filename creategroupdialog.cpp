@@ -8,7 +8,6 @@ CreateGroupDialog::CreateGroupDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->labelWarning->hide();
-
 }
 
 CreateGroupDialog::~CreateGroupDialog()
@@ -18,8 +17,6 @@ CreateGroupDialog::~CreateGroupDialog()
 
 void CreateGroupDialog::on_createButton_clicked()
 {
-    //Need to check that the group is not empty text
-
     //Check if input is null
     if(ui->lineEditGroupName->text().isEmpty())
     {
@@ -44,6 +41,7 @@ void CreateGroupDialog::on_createButton_clicked()
 
         //adding group ref
         GroupRecords::instance()->groupRecords.addToRecords(groupPtr);
+
         //Clear the text boxes
         this->ui->lineEditGroupSize->clear();//works
         this->ui->lineEditGroupName->clear();//works

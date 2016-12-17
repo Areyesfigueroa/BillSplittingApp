@@ -162,6 +162,6 @@ void FriendsDialog::personInfo( std::string& name,  std::string& phoneNum, std::
 {
     Person *person = new Person(name, phoneNum, email);
 
-    //adding Person info to groupInfo, Since there is no add friends window we can fethc the latest
+    //adding Person info to groupInfo
     GroupRecords::instance()->groupRecords.fetchLatestRecord()->addPerson(person);
 }

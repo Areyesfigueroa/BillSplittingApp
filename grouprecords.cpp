@@ -1,6 +1,5 @@
 #include "grouprecords.h"
 
-
 GroupRecords *GroupRecords::r_instance = 0;
 
 GroupRecords::GroupRecords()

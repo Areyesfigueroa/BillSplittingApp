@@ -6,11 +6,6 @@
 #include <functional>
 #include "testfunctions.h"
 
-//list lives here
-//Check with teacher to choose the most optimal way of checking for duplicates
-//For now do not enter duplicate groups.
-//Check using a find
-
 //Default Static Values
 int MainWindow::tableRow = 0;
 int MainWindow::itemRow = 0;
@@ -29,10 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     editGroupDialog = 0;
     friendsDialog = 0;
     billOptionsDialog = 0;
-
-    // ##################################
-    //TestFunctions::TestFunction();
-
 
     //set up
     ui->setupUi(this);
@@ -181,8 +172,6 @@ void MainWindow::onUpdateTableInfo()
     updateTable();
 }
 
-
-
 void MainWindow::updateTable()
 {
     GroupRecords *_instance = GroupRecords::instance();
@@ -219,9 +208,6 @@ void MainWindow::updateTable()
 
     //Setting Table Rows
     tableWidget->setRowCount(tableRow);
-
-    //PeopleNames
-
 
     //Items need to be newed, new Items
     QTableWidgetItem *itemGrpName = new QTableWidgetItem(QString::fromStdString(groupName));
