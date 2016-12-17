@@ -69,6 +69,7 @@ void BillOptionsDialog::on_confirmBillButton_clicked()
 
     //just save the total bill for now
     billCreated(ui->lineEditTotalBill->text().toFloat()); //goes back to main
+
     this->close();
 }
 

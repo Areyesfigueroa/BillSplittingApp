@@ -108,7 +108,7 @@
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>340</x>
       <y>160</y>
       <width>431</width>
       <height>401</height>
@@ -118,9 +118,9 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>340</x>
       <y>130</y>
-      <width>91</width>
+      <width>131</width>
       <height>21</height>
      </rect>
     </property>
@@ -132,7 +132,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Data:</string>
+     <string>Group Data:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="createBillButton">
@@ -148,12 +148,12 @@
      <string>CreateBill</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="friendsBillTable">
+   <widget class="QTableWidget" name="paymentTable">
     <property name="geometry">
      <rect>
-      <x>880</x>
+      <x>810</x>
       <y>160</y>
-      <width>251</width>
+      <width>421</width>
       <height>401</height>
      </rect>
     </property>
@@ -161,7 +161,7 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>880</x>
+      <x>810</x>
       <y>130</y>
       <width>151</width>
       <height>21</height>

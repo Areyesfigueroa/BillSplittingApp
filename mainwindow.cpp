@@ -16,6 +16,10 @@ int MainWindow::tableRow = 0;
 int MainWindow::itemRow = 0;
 int MainWindow::itemColumn = 0;
 
+int MainWindow::paymentTableRow = 0;
+int MainWindow::paymentItemRow = 0;
+int MainWindow::paymentItemColumn = 0;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -27,21 +31,33 @@ MainWindow::MainWindow(QWidget *parent) :
     billOptionsDialog = 0;
 
     // ##################################
-    TestFunctions::TestFunction();
+    //TestFunctions::TestFunction();
 
 
     //set up
     ui->setupUi(this);
 
+    //FriendsTable Data
+    itemPersonName = new QTableWidgetItem*[0];
+    itemBill = new QTableWidgetItem*[0];
+    itemGrpName = new QTableWidgetItem*[0];
+    itemBillPayed = new QTableWidgetItem*[0];
+
     //Init Table
     tableWidget = ui->tableWidget;
+    paymentTableWidget = ui->paymentTable;
 
     //Init Table Row and Column
     tableWidget->setColumnCount(4);
     tableWidget->setRowCount(0);
 
+    //Init Payment Table Row and Column
+    paymentTableWidget->setColumnCount(4);
+    paymentTableWidget->setRowCount(0);
+
     //Init Table Header
     tableWidget->setHorizontalHeaderLabels(QStringList()<<"Group Name"<<"Group Size"<< "People" << "Total Bill");
+    paymentTableWidget->setHorizontalHeaderLabels(QStringList()<<"Friends"<<"Group"<<"Bill"<<"Bill Payed");
 }
 
 MainWindow::~MainWindow()
@@ -66,7 +82,6 @@ void MainWindow::on_editButton_clicked()
         editGroupDialog = new EditGroupDialog(this);
         connect(editGroupDialog, SIGNAL(groupChanged(std::string,int)),this,SLOT(onEditGroup(std::string,int)));
     }
-
     editGroupDialog->show();
 }
 
@@ -91,10 +106,62 @@ void MainWindow::createFriendsDialogConnection()
 
     friendsDialog->show();
 }
+
 void MainWindow::onBillCreated(float totalBill)
 {
     auto getTotalBill = [&totalBill]()->int{return totalBill;};
     updateBill(getTotalBill);
+    updatePeopleOnBPTable();
+        //call the new table function
+}
+
+//UpdateBill separately on bill payment table
+void MainWindow::updateBillOnBPTable()
+{
+
+}
+
+//updates the people on the bill payment table
+void MainWindow::updatePeopleOnBPTable()
+{
+    GroupRecords *_instance = GroupRecords::instance();
+    std::string groupName = _instance->groupRecords.fetchLatestRecord()->getGroupName();
+
+    //Get group ref
+    Group* group = _instance->groupRecords.fetchLatestRecord();
+
+    //PeopleHelper variables
+    size_t peopleCount = group->getPeopleCount();
+    std::string personName;
+    float bill;
+    //go through the people records and get their names
+    for(int i = 0; i < peopleCount; i++)
+    {
+        //increment row
+         paymentTableRow++;
+        //Setting Table Rows
+         paymentTableWidget->setRowCount(paymentTableRow);
+
+         Person* person = group->getPersonByIndex(i);
+         personName = person->getPersonName();
+         bill = person->getBillByKey(groupName);
+
+         //Items need to be newed, new Items
+         itemPersonName[i] = new QTableWidgetItem(QString::fromStdString(personName));
+         itemGrpName[i] = new QTableWidgetItem(QString::fromStdString(groupName));
+         itemBill[i] = new QTableWidgetItem(QString::number(bill));
+         itemBillPayed[i] = new QTableWidgetItem(QString::fromStdString("no")); //have nothing to check at the moment
+
+         //Setting Item Placement
+         paymentTableWidget->setItem(paymentItemRow, paymentItemColumn, itemPersonName[i]); //Friends name
+         paymentTableWidget->setItem(paymentItemRow, paymentItemColumn + 1, itemGrpName[i]); //increment column
+         paymentTableWidget->setItem(paymentItemRow, paymentItemColumn + 2, itemBill[i]);
+         paymentTableWidget->setItem(paymentItemRow, paymentItemColumn + 3, itemBillPayed[i]);
+
+         //increment item rows
+         paymentItemRow++;
+    }
+    //QTableWidgetClear, deletes pointer and the data in it
 }
 
 void MainWindow::updateBill(std::function<int()> getTotalBill) //passing lambda function
