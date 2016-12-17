@@ -1,0 +1,13 @@
+{
+  
+	"people" : [
+
+	   {"name" : "sally", "email" : "gay.com", "number": "123-123-1234", "bill" : 1000},
+	   {"name" : "steve", "email" : "tyler.com", "number": "123-123-1234", "bill" : 984},
+	   {"name" : "bob", "email" : "cool.com", "number": "123-123-1234", "bill" : 13},
+	   {"name" : "gang", "email" : "dub.com", "number": "123-123-1234", "bill" : 1234},
+	   {"name" : "jesus", "email" : "gay.com", "number": "123-123-1234", "bill" : 234},
+	   {"name" : "sadartha guatama", "email" : "gay.com", "number": "123-123-1234", "bill" : 45}
+   ]
+
+}

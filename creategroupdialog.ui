@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>389</width>
     <height>300</height>
    </rect>
   </property>
@@ -99,6 +99,24 @@
      <widget class="QLineEdit" name="lineEditGroupName"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="labelWarning">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>50</y>
+     <width>221</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Group Name is already Taken.</string>
+   </property>
   </widget>
  </widget>
  <resources/>

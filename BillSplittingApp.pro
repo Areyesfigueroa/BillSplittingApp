@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,14 +17,29 @@ SOURCES += main.cpp\
     creategroupdialog.cpp \
     group.cpp \
     grouprecords.cpp \
-    editgroupdialog.cpp
+    editgroupdialog.cpp \
+    friendsdialog.cpp \
+    person.cpp \
+    peoplerecords.cpp \
+    billoptionsdialog.cpp \
+    testfunctions.cpp \
+    dbmanager.cpp
 
 HEADERS  += mainwindow.h \
     creategroupdialog.h \
     group.h \
     grouprecords.h \
-    editgroupdialog.h
+    editgroupdialog.h \
+    friendsdialog.h \
+    person.h \
+    records.h \
+    peoplerecords.h \
+    billoptionsdialog.h \
+    testfunctions.h \
+    dbmanager.h
 
 FORMS    += mainwindow.ui \
     creategroupdialog.ui \
-    editgroupdialog.ui
+    editgroupdialog.ui \
+    friendsdialog.ui \
+    billoptionsdialog.ui

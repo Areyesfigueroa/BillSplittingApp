@@ -7,6 +7,7 @@ CreateGroupDialog::CreateGroupDialog(QWidget *parent) :
     ui(new Ui::CreateGroupDialog)
 {
     ui->setupUi(this);
+    ui->labelWarning->hide();
 }
 
 CreateGroupDialog::~CreateGroupDialog()
@@ -16,29 +17,44 @@ CreateGroupDialog::~CreateGroupDialog()
 
 void CreateGroupDialog::on_createButton_clicked()
 {
-    //Need to check that the group is not empty text
-
     //Check if input is null
     if(ui->lineEditGroupName->text().isEmpty())
     {
         return;
     }
 
-    groupPtr = new Group(ui->lineEditGroupName->text().toStdString(),
-                             ui->lineEditGroupSize->text().toInt());
-    //Adds the user input into my group
-    //creates a new instance everytime
+    //get userInput
+    std::string grpName = ui->lineEditGroupName->text().toStdString();
+    int grpSize = ui->lineEditGroupSize->text().toInt();
 
-    //adding group pointer
-    GroupRecords::instance()->addGroup(groupPtr);
+    //Check Duplicates
+    if(GroupRecords::instance()->groupRecords.checkForDuplicates(grpName))
+    {
+        //Display label
+        ui->labelWarning->show();
+        return;
+    }
+    else
+    {
+        //Allocates the new groups
+        groupPtr = new Group(grpName, grpSize);
 
-    //Clear the text boxes
-    this->ui->lineEditGroupName->clear();//works
-    this->ui->lineEditGroupSize->clear();//works
+        //adding group ref
+        GroupRecords::instance()->groupRecords.addToRecords(groupPtr);
 
-    //Close the Dialog window
-    this->close();
+        //Clear the text boxes
+        this->ui->lineEditGroupSize->clear();//works
+        this->ui->lineEditGroupName->clear();//works
 
-    //Sending Signal
-    this->updateList();
+        //Close the Dialog window
+        this->close();
+
+        //hide warning label
+        ui->labelWarning->hide();
+
+        //Sending Signal
+        this->updateList();
+        this->addFriends(grpSize);
+
+    }
 }

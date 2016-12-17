@@ -2,27 +2,36 @@
 #define GROUP_H
 
 #include <string>
+#include "records.h"
+#include "person.h"
+
 /*
 This class is in charge of storing group information
 it will be stored on the heap with multiple instances
 Will store and edit:
 groupNames
 groupSizes
-
-
 */
 
-class Group
+class Group : protected Person
 {
     std::string groupName;
     int groupSize;
+
 public:
     Group(std::string&, int);
-    void setName(std::string&);
-    void setSize(int);
+    void setGroupName(std::string&);
+    void setGroupSize(int);
 
-    const std::string& getName() const;
-    const int getSize() const;
+    //People Functions
+    void addPerson(Person*);
+    Person* getLatestPerson();
+    Person* getPersonByIndex(int i);
+    size_t getPeopleCount();
+
+    const std::string& getGroupName() const;
+    const int getGroupSize() const;
+
 };
 
 #endif // GROUP_H

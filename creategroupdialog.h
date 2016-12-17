@@ -22,6 +22,7 @@ private slots:
 
 signals:
     void updateList();
+    void addFriends(int);
 
 private:
     Ui::CreateGroupDialog *ui;

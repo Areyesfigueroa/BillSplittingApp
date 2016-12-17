@@ -1,40 +1,25 @@
 #ifndef GROUPRECORDS_H
 #define GROUPRECORDS_H
 
+#include <map>
 #include "group.h"
-#include <vector>
-#include <set>
-/*
-This class is in charge of holding all of the groups in a map with an index
-this will be done so that I can access the different groups when I need to make
-changes.
-
-key: groups Name
-*/
-
+#include "records.h"
 
 class GroupRecords
 {
-    static int index;
-    //use stl find and iterate backwards when comparing
-    std::vector<Group*> groupRecords;
-    static GroupRecords *_instance;
+    static GroupRecords *r_instance;
     GroupRecords();
     ~GroupRecords();
 public:
-    void addGroup(Group*);
-    Group* fetchGroupByIndex(int);
-    Group* fetchLatestGroup();
-    const int getIndex()const;
-    void setIndex(int index);
+
     static GroupRecords *instance()
     {
-        if(!_instance)
+        if(!r_instance)
         {
-            _instance = new GroupRecords();
+            r_instance = new GroupRecords();
         }
-        return _instance;
+        return r_instance;
     }
+    Records<Group*> groupRecords; //will handle the duplicate checking, can be deleted once all is complete
 };
-
 #endif // GROUPRECORDS_H
