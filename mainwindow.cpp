@@ -21,7 +21,7 @@ void MainWindow::on_plusButton_clicked()
     {
     //To use the second window create an instance of the class
     createGrpDialog = new CreateGroupDialog(this);
-    //This is where you connect it// FUCKING AWESOME
+    //This is where you connect it
     connect(createGrpDialog, SIGNAL(updateList()), this, SLOT(onGroupCreated()));
     }
     createGrpDialog->show();
